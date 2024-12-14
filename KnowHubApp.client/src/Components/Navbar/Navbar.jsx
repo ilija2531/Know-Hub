@@ -11,6 +11,7 @@ const Navbar = ({theme, setTheme}) =>{
     }
         
     return(
+        <>
         <div className='navbar'>
             <ul>
                 <li><a href='#'>Home</a></li>
@@ -27,7 +28,8 @@ const Navbar = ({theme, setTheme}) =>{
             <img className='toggle'onClick={()=>{toggle_mode()}} src={theme == 'light' ? dark_mode : light_mode} alt='toggle-icon'></img>
         
         </div>
-        
+        <hr></hr>
+        </>
     );
 }
 
