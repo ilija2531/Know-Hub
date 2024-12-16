@@ -61,3 +61,6 @@ ul li{
 .dark .navbar a{
     color: #fff;
 }
+.navbar .logoImg{
+    width: 250px;
+}
