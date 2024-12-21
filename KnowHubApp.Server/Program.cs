@@ -1,7 +1,10 @@
 using KnowHubApp.Server.Data;
 using KnowHubApp.Server.Data.Entities;
+using KnowHubApp.Server.Repositories.Implementations;
 using KnowHubApp.Server.Repositories.Interfaces;
 using KnowHubApp.Server.Services;
+using KnowHubApp.Server.Services.Implementations;
+using KnowHubApp.Server.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +12,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<ICoursesRepository, CoursesRepositoryImplementation>();
+builder.Services.AddScoped<ICoursesService, CoursesServiceImplementation>();
 
 // Add services to the container.
 
