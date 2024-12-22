@@ -6,3 +6,5 @@ obj/
 *.userosscache
 *.suo
 *.userprefs
+/KnowHubApp.Server/CourseVideos/*
+!/KnowHubApp.Server/CourseVideos/.gitkeep
