@@ -17,11 +17,11 @@ namespace KnowHubApp.Server.Services.Implementations
             _coursesRepository = coursesRepository;
         }
 
-        public async Task<string> UploadCourse(UploadCourseDTO uploadCourseDTO)
+        public async Task<string> UploadCourse(UploadCourseDTO uploadCourseDTO, string userId)
         {
 
             var courseUniqueName = Guid.NewGuid().ToString() + Path.GetExtension(uploadCourseDTO.CourseFile.FileName);
-            var courseVideosFolder = Path.Combine("C:", "Users", "Acer", "OneDrive", "Desktop", "Know-Hub", "KnowHubApp.Server", "CourseVideos");
+            var courseVideosFolder = Path.Combine(Directory.GetCurrentDirectory(), "CourseVideos");
             var coursePath = Path.Combine(courseVideosFolder, courseUniqueName);
 
             using (var fileStream = new FileStream (coursePath, FileMode.Create))
@@ -31,9 +31,11 @@ namespace KnowHubApp.Server.Services.Implementations
 
             var courseEntity = new CourseEntity
             {
+                CourseEntityId = Guid.NewGuid(),
                 Title = uploadCourseDTO.Title,
                 Description = uploadCourseDTO.Description,
-                Path = coursePath
+                Path = coursePath,
+                Id = userId
             };
 
             var saveCourse = await _coursesRepository.UploadCourse(courseEntity);

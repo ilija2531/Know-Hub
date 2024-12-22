@@ -25,6 +25,7 @@ namespace KnowHubApp.Server.Services
             {
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.GivenName, user.UserName),
+                new Claim(ClaimTypes.NameIdentifier, user.Id)
 
 
             };

@@ -1,6 +1,8 @@
 ﻿using KnowHubApp.Server.Data.DTOs;
 using KnowHubApp.Server.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace KnowHubApp.Server.Controllers
 {
@@ -16,8 +18,9 @@ namespace KnowHubApp.Server.Controllers
             _coursesService = coursesService;
         }
 
+        [Authorize]
         [HttpPost("uploadCourse")]
-        public async Task<IActionResult> UploadCourse([FromBody] UploadCourseDTO uploadCourseDTO)
+        public async Task<IActionResult> UploadCourse([FromForm] UploadCourseDTO uploadCourseDTO)
         {
             if (uploadCourseDTO == null)
             {
@@ -26,7 +29,9 @@ namespace KnowHubApp.Server.Controllers
 
             try
             {
-                var course = await _coursesService.UploadCourse(uploadCourseDTO);
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                var course = await _coursesService.UploadCourse(uploadCourseDTO, userId);
                 return Ok("Course Uploaded");
             }
             catch (Exception ex) 

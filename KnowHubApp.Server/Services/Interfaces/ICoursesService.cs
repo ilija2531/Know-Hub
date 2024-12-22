@@ -5,7 +5,7 @@ namespace KnowHubApp.Server.Services.Interfaces
     public interface ICoursesService
     {
 
-        Task<string> UploadCourse (UploadCourseDTO uploadCourseDTO);
+        Task<string> UploadCourse (UploadCourseDTO uploadCourseDTO, string userId);
 
     }
 }

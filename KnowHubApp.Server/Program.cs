@@ -13,6 +13,9 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+
 builder.Services.AddScoped<ICoursesRepository, CoursesRepositoryImplementation>();
 builder.Services.AddScoped<ICoursesService, CoursesServiceImplementation>();
 

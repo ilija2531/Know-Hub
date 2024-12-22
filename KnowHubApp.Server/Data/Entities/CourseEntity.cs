@@ -6,7 +6,7 @@ namespace KnowHubApp.Server.Data.Entities
     public class CourseEntity
     {
         [Key]
-        public Guid CourseEntityId {  get; set; }
+        public Guid CourseEntityId {  get; set; } = Guid.NewGuid();
 
         [Required]
         public string Title { get; set; } = string.Empty;
@@ -19,7 +19,7 @@ namespace KnowHubApp.Server.Data.Entities
 
         // UserEntity Primary Key
         [ForeignKey("UserEntity")]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         public UserEntity UserEntity { get; set; }
 
