@@ -41,5 +41,20 @@ namespace KnowHubApp.Server.Controllers
 
         }
 
+        [Authorize]
+        [HttpGet("FetchCourses")]
+        public async Task<List<ShowAllDTO>> ShowAll()
+        {
+            var fetchedCoureses = await _coursesService.ShowAll();
+            
+            if (fetchedCoureses == null)
+            {
+                return new List<ShowAllDTO>();
+            } else
+            {
+                return fetchedCoureses;
+            }
+        }
+
     }
 }

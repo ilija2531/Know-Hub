@@ -1,6 +1,7 @@
 ﻿using KnowHubApp.Server.Data;
 using KnowHubApp.Server.Data.Entities;
 using KnowHubApp.Server.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace KnowHubApp.Server.Repositories.Implementations
 {
@@ -21,6 +22,11 @@ namespace KnowHubApp.Server.Repositories.Implementations
             _appDbContext.Add(courseEntity);
             await _appDbContext.SaveChangesAsync();
             return courseEntity;
+        }
+
+        public Task<List<CourseEntity>> ShowAll()
+        {
+            return _appDbContext.Courses.Include(u => u.UserEntity).ToListAsync();
         }
 
     }

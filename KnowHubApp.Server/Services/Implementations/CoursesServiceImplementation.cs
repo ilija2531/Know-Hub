@@ -45,5 +45,20 @@ namespace KnowHubApp.Server.Services.Implementations
 
         }
 
+        public async Task<List<ShowAllDTO>> ShowAll()
+        {
+            var courses = await _coursesRepository.ShowAll();
+            var courseDTO = courses.Select(c => new ShowAllDTO
+            {
+                CourseDTOID = c.CourseEntityId,
+                Title = c.Title,
+                Description = c.Description,
+                Path = c.Path,
+                FullName = c.UserEntity.FullName
+            }).ToList();
+
+            return courseDTO;
+        }
+
     }
 }

@@ -6,6 +6,8 @@ namespace KnowHubApp.Server.Repositories.Interfaces
     {
 
         Task<CourseEntity> UploadCourse(CourseEntity courseEntity);
+        
+        Task<List<CourseEntity>> ShowAll();
 
     }
 }
