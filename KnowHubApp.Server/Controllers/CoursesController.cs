@@ -42,7 +42,7 @@ namespace KnowHubApp.Server.Controllers
         }
 
         [Authorize]
-        [HttpGet("FetchCourses")]
+        [HttpGet("fetchCourses")]
         public async Task<List<ShowAllDTO>> ShowAll()
         {
             var fetchedCoureses = await _coursesService.ShowAll();
@@ -54,6 +54,16 @@ namespace KnowHubApp.Server.Controllers
             {
                 return fetchedCoureses;
             }
+        }
+
+        [Authorize]
+        [HttpDelete("deleteCourse/{id}")]
+
+        public async Task<string> DeleteCourse(Guid Id)
+        {
+            _coursesService.DeleteCourse(Id);
+
+            return "Course sucessfully deleted";
         }
 
     }

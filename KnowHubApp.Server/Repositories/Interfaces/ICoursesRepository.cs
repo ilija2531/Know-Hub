@@ -9,5 +9,7 @@ namespace KnowHubApp.Server.Repositories.Interfaces
         
         Task<List<CourseEntity>> ShowAll();
 
+        Task<string> DeleteCourse(Guid id);
+
     }
 }

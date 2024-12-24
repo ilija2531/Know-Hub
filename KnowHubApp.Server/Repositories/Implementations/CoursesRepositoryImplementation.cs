@@ -29,5 +29,13 @@ namespace KnowHubApp.Server.Repositories.Implementations
             return _appDbContext.Courses.Include(u => u.UserEntity).ToListAsync();
         }
 
+        public async Task<string> DeleteCourse(Guid id)
+        {
+            var deleteCourse = await _appDbContext.Courses.FirstOrDefaultAsync(d => d.CourseEntityId == id);
+
+            _appDbContext.Courses.Remove(deleteCourse);
+            await _appDbContext.SaveChangesAsync();
+            return "Course deleted successfully ";
+        }
     }
 }

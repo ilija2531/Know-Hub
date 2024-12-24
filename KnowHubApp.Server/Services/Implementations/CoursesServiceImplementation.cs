@@ -60,5 +60,12 @@ namespace KnowHubApp.Server.Services.Implementations
             return courseDTO;
         }
 
+        public async Task<string> DeleteCourse(Guid Id)
+        {
+            _coursesRepository.DeleteCourse(Id);
+
+            return "Sucessfully Deleted";
+        }
+
     }
 }

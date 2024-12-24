@@ -10,5 +10,7 @@ namespace KnowHubApp.Server.Services.Interfaces
 
         Task<List<ShowAllDTO>> ShowAll();
 
+        Task<string> DeleteCourse (Guid Id);
+
     }
 }
