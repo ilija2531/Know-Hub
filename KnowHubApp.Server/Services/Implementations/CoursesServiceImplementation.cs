@@ -127,5 +127,42 @@ namespace KnowHubApp.Server.Services.Implementations
 
 
         }
+
+        public async Task <List<SearchedCourses>> SearchCourses(string title)
+        {
+            var searchedCoursesService = await _coursesRepository.SearchCourses(title);
+
+            var searchedCoursesDTO = searchedCoursesService.Select(c => new SearchedCourses
+
+            {
+                CourseEntityId = c.CourseEntityId,
+                Title = c.Title,
+                Description = c.Description,
+                Path = c.Path,
+                FullName = c.UserEntity.FullName
+
+            }
+
+            ).ToList();
+
+            return searchedCoursesDTO;
+        }
+
+        public async Task<ProfileDataDTO> GetProfileData(string id)
+        {
+            var theData = await _coursesRepository.GetUserDetails(id);
+
+            var theDataDTO = new ProfileDataDTO
+            {
+
+                Id = theData.Id,
+                FullName = theData.FullName,
+                UserName = theData.UserName,
+                Email = theData.Email
+
+            };
+
+            return theDataDTO;
+        }
     }
 }

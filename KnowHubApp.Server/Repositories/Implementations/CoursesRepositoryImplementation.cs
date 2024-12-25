@@ -66,5 +66,21 @@ namespace KnowHubApp.Server.Repositories.Implementations
 
             return courses;
         }
+
+        public async Task<List<CourseEntity>> SearchCourses(string title)
+        {
+            var generatedCourses = await _appDbContext.Courses.Where(c => c.Title.ToLower().Contains(title.ToLower()))
+                .Include(c => c.UserEntity)
+                .ToListAsync();
+            return generatedCourses;
+        }
+
+        public async Task<UserEntity> GetUserDetails(string id)
+        {
+            var theUserDetails = await _appDbContext.Users.Where(u => u.Id == id)
+                .FirstOrDefaultAsync();
+
+            return theUserDetails;
+        }
     }
 }

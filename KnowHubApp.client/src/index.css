@@ -15,8 +15,8 @@ html, body {
 
 .container{
   width: 100vw ;
+  background: white;
   min-height: 100vh;
-  background: #fff;
   transition: 0.5s;
 }
 .container.dark{

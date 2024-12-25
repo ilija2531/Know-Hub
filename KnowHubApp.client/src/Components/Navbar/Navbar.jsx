@@ -17,10 +17,12 @@ import logout_img from '../../assets/Navbar-sliki/logout.png'
 
 const Navbar = ({theme, setTheme}) =>{
 
+    
+
     const [open, setOpen] = useState(false);
 
     const toggle_mode = () => {
-        theme == 'light' ?  setTheme('dark') : setTheme('light');
+        theme == 'light' ?  setTheme('dark') : setTheme('#fff');
     }
 
     function DropdownItem(props){
@@ -46,6 +48,12 @@ const Navbar = ({theme, setTheme}) =>{
                 <img src={theme == 'light' ? search_icon : search_icon} alt=''></img>
             
             </div>
+
+                <ul>
+                    <li><Link to='/signup' >Sign Up</Link></li>
+                    <li><Link to='/login' >Login</Link></li>
+                </ul>
+
             <div className='dropdown'>
                 <div className='dropdown-trigger' onClick={()=>{setOpen(!open)}}>
                 <img className='account-img' src={account_img}></img>
@@ -53,7 +61,7 @@ const Navbar = ({theme, setTheme}) =>{
             <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
                 <h3>Nikola Gruevski</h3>
                 <ul>
-                <Link to='/'><DropdownItem img = {home_img} text = {"Home"}/></Link>
+                <Link to='/home'><DropdownItem img = {home_img} text = {"Home"}/></Link>
                 <Link to='/myProfile'><DropdownItem img = {account_img} text = {"My Profile"}/></Link>
                 <Link to='/catalog'><DropdownItem img = {catalog_img} text = {"Catalog"}/></Link>
                 <Link to='/myCourses'><DropdownItem img = {courses_img} text = {"My Courses"}/></Link>

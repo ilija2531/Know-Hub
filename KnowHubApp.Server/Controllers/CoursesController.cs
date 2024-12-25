@@ -41,20 +41,6 @@ namespace KnowHubApp.Server.Controllers
 
         }
 
-        [Authorize]
-        [HttpGet("fetchCourses")]
-        public async Task<List<ShowAllDTO>> ShowAll()
-        {
-            var fetchedCoureses = await _coursesService.ShowAll();
-            
-            if (fetchedCoureses == null)
-            {
-                return new List<ShowAllDTO>();
-            } else
-            {
-                return fetchedCoureses;
-            }
-        }
 
         [Authorize]
         [HttpDelete("deleteCourse/{id}")]
@@ -75,11 +61,53 @@ namespace KnowHubApp.Server.Controllers
         }
 
         [Authorize]
+        [HttpGet("fetchCourses")]
+        public async Task<List<ShowAllDTO>> ShowAll()
+        {
+            var fetchedCoureses = await _coursesService.ShowAll();
+
+            if (fetchedCoureses == null)
+            {
+                return new List<ShowAllDTO>();
+            }
+            else
+            {
+                return fetchedCoureses;
+            }
+        }
+
+        [Authorize]
         [HttpGet("fetchUserCourses/{id}")]
         public async Task<List<UserCourses>> GetUserCourses(string id)
         {
             var fetchedCoureses = await _coursesService.GetUserCourses(id);
             return fetchedCoureses;
+        }
+
+        [Authorize]
+        [HttpGet("searchCourses/{title}")]
+        public async Task<List<SearchedCourses>> SearchCourses (string title)
+        {
+            var fetchedCourses = await _coursesService.SearchCourses(title);
+
+            return fetchedCourses;
+
+        }
+
+        [Authorize]
+        [HttpGet("fetchUserDetails/{id}")]
+        public async Task<ProfileDataDTO> GetProfileData(string id)
+        {
+            var fetchedDetails = await _coursesService.GetProfileData(id);
+
+            if (fetchedDetails == null)
+            {
+                return new ProfileDataDTO();
+            } else
+            {
+                return fetchedDetails;
+            }
+
         }
 
     }
