@@ -110,5 +110,14 @@ namespace KnowHubApp.Server.Controllers
 
         }
 
+        [Authorize]
+        [HttpPut("updateUserDetails/{id}")]
+        public async Task<ProfileDataDTO> UpdateUserDetails(ProfileDataDTO profileDataDTO, string id)
+        {
+            var data = await _coursesService.UpdateUserDetails(profileDataDTO, id);
+
+            return data;
+        }
+
     }
 }

@@ -82,5 +82,23 @@ namespace KnowHubApp.Server.Repositories.Implementations
 
             return theUserDetails;
         }
+
+        public async Task<UserEntity> GetUserById(string id)
+        {
+            return _appDbContext.Users.FirstOrDefault(c => c.Id == id);
+        }
+
+        public async Task<UserEntity> UpdateUserDetails(UserEntity userEntity, string id)
+        {
+            var oldDetails = await _appDbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+
+            oldDetails.FullName = userEntity.FullName;
+            oldDetails.UserName = userEntity.UserName;
+            oldDetails.Id = id;
+
+            await _appDbContext.SaveChangesAsync();
+
+            return oldDetails;
+        }
     }
 }

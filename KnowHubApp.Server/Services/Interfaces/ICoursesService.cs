@@ -20,5 +20,7 @@ namespace KnowHubApp.Server.Services.Interfaces
 
         Task<ProfileDataDTO> GetProfileData (string id);
 
+        Task<ProfileDataDTO> UpdateUserDetails(ProfileDataDTO profileDataDTO, string id);
+
     }
 }

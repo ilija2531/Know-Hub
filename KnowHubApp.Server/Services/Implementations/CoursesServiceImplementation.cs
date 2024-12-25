@@ -164,5 +164,28 @@ namespace KnowHubApp.Server.Services.Implementations
 
             return theDataDTO;
         }
+
+        public async Task<ProfileDataDTO> UpdateUserDetails(ProfileDataDTO profileDataDTO, string id)
+        {
+            var details = await _coursesRepository.GetUserById(id);
+
+            details.FullName = profileDataDTO.FullName;
+            details.UserName = profileDataDTO.UserName;
+            details.Email = profileDataDTO.Email;
+            details.Id = id;
+
+            await _coursesRepository.UpdateUserDetails(details, id);
+
+            profileDataDTO = new ProfileDataDTO
+            {
+
+                Id = details.Id,
+                FullName = details.FullName,
+                UserName = details.UserName,
+
+            };
+
+            return profileDataDTO;
+        }
     }
 }
