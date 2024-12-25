@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Components/Navbar/Navbar.jsx";
+import Footer from "./Components/Footer/Footer.jsx";
 import Home from "./pages/Home/Home.jsx";
 import MyCourses from "./pages/MyCourses/MyCourses.jsx";
 import Catalog from "./pages/Catalog/Catalog.jsx";
