@@ -16,7 +16,7 @@ namespace KnowHubApp.Server.Services.Interfaces
 
         Task<List<UserCourses>> GetUserCourses (string id);
 
-        
+        Task<List<SearchedCourses>> SearchCourses(string id);
 
     }
 }

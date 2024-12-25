@@ -82,5 +82,15 @@ namespace KnowHubApp.Server.Controllers
             return fetchedCoureses;
         }
 
+        [Authorize]
+        [HttpGet("searchCourses/{title}")]
+        public async Task<List<SearchedCourses>> SearchCourses (string title)
+        {
+            var fetchedCourses = await _coursesService.SearchCourses(title);
+
+            return fetchedCourses;
+
+        }
+
     }
 }
