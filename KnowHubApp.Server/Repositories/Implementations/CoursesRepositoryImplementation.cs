@@ -74,5 +74,13 @@ namespace KnowHubApp.Server.Repositories.Implementations
                 .ToListAsync();
             return generatedCourses;
         }
+
+        public async Task<UserEntity> GetUserDetails(string id)
+        {
+            var theUserDetails = await _appDbContext.Users.Where(u => u.Id == id)
+                .FirstOrDefaultAsync();
+
+            return theUserDetails;
+        }
     }
 }

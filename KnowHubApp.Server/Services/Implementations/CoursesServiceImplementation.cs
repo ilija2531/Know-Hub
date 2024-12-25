@@ -147,5 +147,22 @@ namespace KnowHubApp.Server.Services.Implementations
 
             return searchedCoursesDTO;
         }
+
+        public async Task<ProfileDataDTO> GetProfileData(string id)
+        {
+            var theData = await _coursesRepository.GetUserDetails(id);
+
+            var theDataDTO = new ProfileDataDTO
+            {
+
+                Id = theData.Id,
+                FullName = theData.FullName,
+                UserName = theData.UserName,
+                Email = theData.Email
+
+            };
+
+            return theDataDTO;
+        }
     }
 }

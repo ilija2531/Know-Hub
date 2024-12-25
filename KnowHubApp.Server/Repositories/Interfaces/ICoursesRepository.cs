@@ -16,5 +16,7 @@ namespace KnowHubApp.Server.Repositories.Interfaces
         Task<List<CourseEntity>> GetUserCourses(string id);
 
         Task<List<CourseEntity>> SearchCourses(string title);
+
+        Task<UserEntity> GetUserDetails(string id);
     }
 }

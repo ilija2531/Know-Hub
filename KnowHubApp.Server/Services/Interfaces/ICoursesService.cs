@@ -18,5 +18,7 @@ namespace KnowHubApp.Server.Services.Interfaces
 
         Task<List<SearchedCourses>> SearchCourses(string id);
 
+        Task<ProfileDataDTO> GetProfileData (string id);
+
     }
 }
