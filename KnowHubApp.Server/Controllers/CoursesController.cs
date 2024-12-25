@@ -66,5 +66,14 @@ namespace KnowHubApp.Server.Controllers
             return "Course sucessfully deleted";
         }
 
+        [Authorize]
+        [HttpPut("updateCourse/{id}")]
+        public async Task<UpdatedCourseDTO> UpdateCourse([FromForm]UpdateCourseDTO updateCourseDTO, [FromRoute] Guid id)
+        {
+            var updatedCourse = await _coursesService.UpdateCourse(updateCourseDTO, id);
+            return updatedCourse;
+        }
+
+
     }
 }

@@ -1,8 +1,10 @@
-﻿using KnowHubApp.Server.Data.DTOs;
+﻿using KnowHubApp.Server.Data;
+using KnowHubApp.Server.Data.DTOs;
 using KnowHubApp.Server.Data.Entities;
 using KnowHubApp.Server.Repositories.Interfaces;
 using KnowHubApp.Server.Services.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using System.IO;
 
 namespace KnowHubApp.Server.Services.Implementations
@@ -12,7 +14,7 @@ namespace KnowHubApp.Server.Services.Implementations
 
         public readonly ICoursesRepository _coursesRepository;
 
-        public CoursesServiceImplementation (ICoursesRepository coursesRepository)
+        public CoursesServiceImplementation(ICoursesRepository coursesRepository)
         {
             _coursesRepository = coursesRepository;
         }
@@ -24,9 +26,9 @@ namespace KnowHubApp.Server.Services.Implementations
             var courseVideosFolder = Path.Combine(Directory.GetCurrentDirectory(), "CourseVideos");
             var coursePath = Path.Combine(courseVideosFolder, courseUniqueName);
 
-            using (var fileStream = new FileStream (coursePath, FileMode.Create))
+            using (var fileStream = new FileStream(coursePath, FileMode.Create))
             {
-                await uploadCourseDTO.CourseFile.CopyToAsync (fileStream);
+                await uploadCourseDTO.CourseFile.CopyToAsync(fileStream);
             }
 
             var courseEntity = new CourseEntity
@@ -67,5 +69,45 @@ namespace KnowHubApp.Server.Services.Implementations
             return "Sucessfully Deleted";
         }
 
+
+
+        public async Task<UpdatedCourseDTO> UpdateCourse(UpdateCourseDTO updateCourseDTO, Guid id)
+        {
+            var courseEntity = await _coursesRepository.GetCourseById(id);
+
+            if (updateCourseDTO.CourseFile != null)
+            {
+                if (!string.IsNullOrEmpty(courseEntity.Path) && File.Exists(courseEntity.Path))
+                {
+                    File.Delete(courseEntity.Path);
+                }
+            }
+
+            var newFileName = Guid.NewGuid().ToString() + Path.GetExtension(updateCourseDTO.CourseFile.FileName);
+            var courseVideosFolder = Path.Combine(Directory.GetCurrentDirectory(), "CourseVideos");
+            var newFilePath = Path.Combine(courseVideosFolder, newFileName);
+
+            using (var fileStream = new FileStream(newFilePath, FileMode.Create))
+            {
+                await updateCourseDTO.CourseFile.CopyToAsync(fileStream);
+            }
+
+            courseEntity.Path = newFilePath;
+            courseEntity.Title = updateCourseDTO.Title;
+            courseEntity.Description = updateCourseDTO.Description;
+
+            await _coursesRepository.UpdateCourse(courseEntity, id);
+
+            return new UpdatedCourseDTO
+            {
+                UpdatedCourseDtoId = courseEntity.CourseEntityId,
+                Title = courseEntity.Title,
+                Description = courseEntity.Description,
+                Path = courseEntity.Path
+            };
+
+
+
+        }
     }
 }

@@ -37,5 +37,25 @@ namespace KnowHubApp.Server.Repositories.Implementations
             await _appDbContext.SaveChangesAsync();
             return "Course deleted successfully ";
         }
+
+        public async Task<CourseEntity> GetCourseById(Guid id)
+        {
+            return await _appDbContext.Courses.FirstOrDefaultAsync(c => c.CourseEntityId == id);
+        }
+
+        public async Task<CourseEntity> UpdateCourse(CourseEntity courseEntity, Guid id)
+        {
+            var oldCourse = await _appDbContext.Courses.FirstOrDefaultAsync(c => c.CourseEntityId == id);
+
+            oldCourse.Title = courseEntity.Title;
+            oldCourse.Description = courseEntity.Description;
+            oldCourse.Path = courseEntity.Path;
+
+            _appDbContext.Entry(oldCourse).State = EntityState.Modified;
+
+            await _appDbContext.SaveChangesAsync();
+
+            return oldCourse;
+        }
     }
 }
