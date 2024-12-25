@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home.jsx";
 import MyCourses from "./pages/MyCourses/MyCourses.jsx";
 import Catalog from "./pages/Catalog/Catalog.jsx";
 import MyProfile from "./pages/MyProfile/MyProfile.jsx";
+import CourseCreationPage from "./CourseCreation/courseCreationPage.jsx";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/catalog" element={<Catalog/>}/>
         <Route path="/myProfile" element={<MyProfile/>}/>
       </Routes>
+      <CourseCreationPage />
       </div>
       </>
     );
