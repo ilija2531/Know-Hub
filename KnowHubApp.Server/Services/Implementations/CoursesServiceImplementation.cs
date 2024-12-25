@@ -109,5 +109,23 @@ namespace KnowHubApp.Server.Services.Implementations
 
 
         }
+
+        public async Task <List<UserCourses>> GetUserCourses(string id)
+        {
+            var courses = await _coursesRepository.GetUserCourses(id);
+
+            var courseDTO = courses.Select(c => new UserCourses
+            {
+                CourseDTOID = c.CourseEntityId,
+                Title = c.Title,
+                Description = c.Description,
+                Path = c.Path,
+                FullName = c.UserEntity.FullName
+            }).ToList();
+
+            return courseDTO;
+
+
+        }
     }
 }

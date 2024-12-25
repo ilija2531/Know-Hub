@@ -14,6 +14,8 @@ namespace KnowHubApp.Server.Services.Interfaces
 
         Task<UpdatedCourseDTO> UpdateCourse(UpdateCourseDTO updateCourseDTO, Guid id);
 
+        Task<List<UserCourses>> GetUserCourses (string id);
+
         
 
     }

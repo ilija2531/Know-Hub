@@ -12,5 +12,7 @@ namespace KnowHubApp.Server.Repositories.Interfaces
         Task<CourseEntity> UpdateCourse(CourseEntity courseEntity, Guid id);
 
         Task<CourseEntity> GetCourseById(Guid id);
+
+        Task<List<CourseEntity>> GetUserCourses(string id);
     }
 }
