@@ -1,0 +1,246 @@
+
+
+.welcome-container {
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .hero-section {
+    background-color: white; /* Light background for hero section */
+    color: black; /* Dark text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .hero-content {
+    z-index: 2;
+    max-width: 900px;
+    padding: 20px;
+  }
+  
+  .hero-title {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .hero-subtitle {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero-description {
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+  }
+  
+  /* Dark mode styles */
+  .dark .hero-section {
+    background-color: #121212; /* Dark background */
+  }
+  
+  .dark .hero-section h1,
+  .dark .hero-section p {
+    color: #fff; /* Make all text white in dark mode */
+  }
+  
+  .main-content {
+    padding: 60px 20px;
+  }
+  
+  /* Features Section */
+  .features {
+    background-color: white; /* Default light background */
+    padding: 20px 20px;
+    text-align: center;
+  }
+  
+  .features .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+  }
+  
+  .feature-cards {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 20px;
+  }
+  
+  .feature-card {
+    background-color: #f9f9f9;
+    padding: 25px;
+    width: 30%;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  .feature-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .feature-card p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  /* Dark mode styles */
+  .dark .features {
+    background-color: #1c1c1c; /* Dark background */
+  }
+  
+  .dark .features .section-title,
+  .dark .feature-card h3,
+  .dark .feature-card p {
+    color: #fff; /* White text for contrast */
+  }
+  
+  .dark .feature-card {
+    background-color: #333; /* Dark cards */
+  }
+  
+  .why-choose {
+    background-color: white; /* Default light background */
+    padding: 60px 20px;
+    margin-top: 80px; /* Added space above the section */
+    margin-bottom: 40px; /* Added space below the section */
+    text-align: center;
+  }
+  
+  .why-choose .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .why-choose ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .why-choose ul li {
+    margin: 15px 0;
+  }
+  
+  /* Dark mode styles */
+  .dark .why-choose {
+    background-color: #1c1c1c; /* Dark background */
+  }
+  
+  .dark .why-choose .section-title,
+  .dark .why-choose ul li {
+    color: #fff; /* White text for contrast */
+  }
+  
+  /* Services Section */
+  .services {
+    background-color: white; /* Default light background */
+    padding: 60px 20px;
+    text-align: center;
+  }
+  
+  .services .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+  }
+  
+  .service-cards {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 20px;
+  }
+  
+  .service-card {
+    background-color: #f9f9f9;
+    padding: 30px;
+    width: 30%;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  .service-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .service-card p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  /* Dark mode styles */
+  .dark .services {
+    background-color: #1c1c1c; /* Dark background */
+  }
+  
+  .dark .services .section-title,
+  .dark .service-card h3,
+  .dark .service-card p {
+    color: #fff; /* White text for contrast */
+  }
+  
+  .dark .service-card {
+    background-color: #333; /* Dark cards */
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: white; /* Default light background */
+    color: black;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Dark mode styles */
+  .dark .footer {
+    background-color: #1a1a1a; /* Dark background */
+  }
+  
+  .dark .footer p {
+    color: #fff; /* White text */
+  }
+  
+  .dark a {
+    color: #BB86FC; /* Light purple color for links */
+  }
+  
+  .dark a:hover {
+    color: #62046d; /* Change on hover */
+  }
+  
+  /* Buttons */
+  .dark .cta-button {
+    background-color: #62046d;
+    color: #fff;
+    border: none;
+  }
+  
+  .dark .cta-button:hover {
+    background-color: #9c27b0;
+  }
