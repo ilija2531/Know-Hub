@@ -57,7 +57,16 @@ namespace KnowHubApp.Server.Controllers
         public async Task<UpdatedCourseDTO> UpdateCourse([FromForm]UpdateCourseDTO updateCourseDTO, [FromRoute] Guid id)
         {
             var updatedCourse = await _coursesService.UpdateCourse(updateCourseDTO, id);
-            return updatedCourse;
+
+            if (updatedCourse == null)
+            {
+                return new UpdatedCourseDTO();
+            }
+            else
+            {
+                return updatedCourse;
+            }
+            
         }
 
         [Authorize]
@@ -81,7 +90,14 @@ namespace KnowHubApp.Server.Controllers
         public async Task<List<UserCourses>> GetUserCourses(string id)
         {
             var fetchedCoureses = await _coursesService.GetUserCourses(id);
-            return fetchedCoureses;
+            if (fetchedCoureses == null)
+            {
+                return new List<UserCourses>();
+            } else
+            {
+                return fetchedCoureses;
+            }
+            
         }
 
         [Authorize]
@@ -90,7 +106,14 @@ namespace KnowHubApp.Server.Controllers
         {
             var fetchedCourses = await _coursesService.SearchCourses(title);
 
-            return fetchedCourses;
+            if (fetchedCourses == null)
+            {
+                return new List<SearchedCourses>();
+            }
+            else
+            {
+                return fetchedCourses;
+            }
 
         }
 
@@ -103,7 +126,8 @@ namespace KnowHubApp.Server.Controllers
             if (fetchedDetails == null)
             {
                 return new ProfileDataDTO();
-            } else
+            } 
+            else
             {
                 return fetchedDetails;
             }
@@ -116,7 +140,16 @@ namespace KnowHubApp.Server.Controllers
         {
             var data = await _coursesService.UpdateUserDetails(profileDataDTO, id);
 
-            return data;
+            if (data == null)
+            {
+                return new ProfileDataDTO();
+            }
+            else
+            {
+                return data;
+            }
+
+            
         }
 
     }
