@@ -1,4 +1,5 @@
-﻿using KnowHubApp.Server.Data;
+﻿using KnowHubApp.Server.AutoMapper;
+using KnowHubApp.Server.Data;
 using KnowHubApp.Server.Data.DTOs;
 using KnowHubApp.Server.Data.Entities;
 using KnowHubApp.Server.Repositories.Interfaces;
@@ -6,6 +7,7 @@ using KnowHubApp.Server.Services.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
+using AutoMapper;
 
 namespace KnowHubApp.Server.Services.Implementations
 {
@@ -13,10 +15,12 @@ namespace KnowHubApp.Server.Services.Implementations
     {
 
         public readonly ICoursesRepository _coursesRepository;
+        public readonly IMapper _uploadProfileMapper;
 
-        public CoursesServiceImplementation(ICoursesRepository coursesRepository)
+        public CoursesServiceImplementation(ICoursesRepository coursesRepository, IMapper uploadProfileMapper)
         {
             _coursesRepository = coursesRepository;
+            _uploadProfileMapper = uploadProfileMapper;
         }
 
         public async Task<string> UploadCourse(UploadCourseDTO uploadCourseDTO, string userId)
@@ -31,33 +35,20 @@ namespace KnowHubApp.Server.Services.Implementations
                 await uploadCourseDTO.CourseFile.CopyToAsync(fileStream);
             }
 
-            var courseEntity = new CourseEntity
-            {
-                CourseEntityId = Guid.NewGuid(),
-                Title = uploadCourseDTO.Title,
-                Description = uploadCourseDTO.Description,
-                Path = coursePath,
-                Id = userId
-            };
+            var courseEntity = _uploadProfileMapper.Map<CourseEntity>(uploadCourseDTO);
+            courseEntity.CourseEntityId = Guid.NewGuid();
+            courseEntity.Path = coursePath;
+            courseEntity.Id = userId;
 
             var saveCourse = await _coursesRepository.UploadCourse(courseEntity);
             return ("Course saved sucessfully");
-
-
 
         }
 
         public async Task<List<ShowAllDTO>> ShowAll()
         {
             var courses = await _coursesRepository.ShowAll();
-            var courseDTO = courses.Select(c => new ShowAllDTO
-            {
-                CourseDTOID = c.CourseEntityId,
-                Title = c.Title,
-                Description = c.Description,
-                Path = c.Path,
-                FullName = c.UserEntity.FullName
-            }).ToList();
+            var courseDTO = _uploadProfileMapper.Map<List<ShowAllDTO>>(courses);
 
             return courseDTO;
         }
