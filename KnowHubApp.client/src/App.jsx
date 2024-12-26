@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Components/Navbar/Navbar.jsx";
 import Home from "./pages/Home/Home.jsx";
+import Welcome from "./pages/Welcome/Welcome.jsx";
 import MyCourses from "./pages/MyCourses/MyCourses.jsx";
 import Catalog from "./pages/Catalog/Catalog.jsx";
 import MyProfile from "./pages/MyProfile/MyProfile.jsx";
@@ -21,7 +22,8 @@ function App() {
      <div className={`container ${theme}`}>
         <Navbar theme={theme} setTheme={setTheme}/>
       <Routes>
-        <Route path="/" element={<Home/>}/>
+        <Route path="/" element={<Welcome/>}/>
+        <Route path="/home" element={<Home/>}/>
         <Route path="/myCourses" element={<MyCourses/>}/>
         <Route path="/catalog" element={<Catalog/>}/>
         <Route path="/myProfile" element={<MyProfile/>}/>
