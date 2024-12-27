@@ -35,6 +35,7 @@ function App() {
         <Route path="/catalog" element={<Catalog/>}/>
         <Route path="/myProfile" element={<MyProfile/>}/>
       </Routes>
+      <Footer/>
       </div>
       </>
     );

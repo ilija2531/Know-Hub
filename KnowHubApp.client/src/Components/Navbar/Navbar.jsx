@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import search_icon from '../../assets/Navbar-sliki/search-1.png'; // Use a single search icon
@@ -11,8 +11,26 @@ import catalog_img from '../../assets/Navbar-sliki/catalog.png';
 import courses_img from '../../assets/Navbar-sliki/myCourses.png';
 import logout_img from '../../assets/Navbar-sliki/logout.png';
 
-const Navbar = ({ theme, setTheme }) => {
+const Navbar = ({ theme = 'light', setTheme }) => { // Default theme to 'light'
   const [open, setOpen] = useState(false);
+
+  const menuRef = useRef(null); // Initialize the ref
+
+  // Close dropdown menu if clicked outside of it
+  useEffect(() => {
+    const handler = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    // Cleanup event listener on unmount
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  }, []); // Empty dependency array to run this effect only once
 
   // Toggle theme between light and dark
   const toggle_mode = () => {
@@ -27,7 +45,7 @@ const Navbar = ({ theme, setTheme }) => {
   function DropdownItem(props) {
     return (
       <li className="dropdownItem">
-        <img src={props.img} alt={props.text}></img>
+        <img src={props.img} alt={props.text} />
         <span>{props.text}</span>
       </li>
     );
@@ -55,7 +73,7 @@ const Navbar = ({ theme, setTheme }) => {
           </li>
         </ul>
 
-        <div className="dropdown">
+        <div className="dropdown" ref={menuRef}> {/* Add ref to dropdown */}
           <div className="dropdown-trigger" onClick={() => setOpen(!open)}>
             <img className="account-img" src={account_img} alt="account" />
           </div>
