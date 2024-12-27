@@ -55,7 +55,7 @@ namespace KnowHubApp.Server.Services.Implementations
 
         public async Task<string> DeleteCourse(Guid Id)
         {
-            _coursesRepository.DeleteCourse(Id);
+            await _coursesRepository.DeleteCourse(Id);
 
             return "Sucessfully Deleted";
         }
@@ -105,14 +105,7 @@ namespace KnowHubApp.Server.Services.Implementations
         {
             var courses = await _coursesRepository.GetUserCourses(id);
 
-            var courseDTO = courses.Select(c => new UserCourses
-            {
-                CourseDTOID = c.CourseEntityId,
-                Title = c.Title,
-                Description = c.Description,
-                Path = c.Path,
-                FullName = c.UserEntity.FullName
-            }).ToList();
+            var courseDTO = _uploadProfileMapper.Map<List<UserCourses>>(courses);
 
             return courseDTO;
 

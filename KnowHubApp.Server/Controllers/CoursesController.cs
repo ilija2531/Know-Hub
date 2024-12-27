@@ -47,7 +47,7 @@ namespace KnowHubApp.Server.Controllers
 
         public async Task<string> DeleteCourse(Guid Id)
         {
-            _coursesService.DeleteCourse(Id);
+            await _coursesService.DeleteCourse(Id);
 
             return "Course sucessfully deleted";
         }
