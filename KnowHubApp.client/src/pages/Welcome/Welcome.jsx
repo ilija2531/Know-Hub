@@ -41,13 +41,14 @@ const Welcome = () => {
           {/* Why Choose Knowhub */}
           <section className="why-choose">
             <h2 className="section-title">Why Choose Knowhub?</h2>
-            <p>We are committed to providing the best online learning experience tailored to your needs. Here’s why you should choose Knowhub for your educational journey:</p>
-            <ul>
-              <li>Personalized learning paths that cater to your goals.</li>
-              <li>Easy-to-use platform for a seamless, distraction-free experience.</li>
-              <li>Access to a global network of educators and students for diverse perspectives.</li>
-              <li>Interactive and engaging content designed to keep you motivated.</li>
-            </ul>
+            <p>We are committed to providing the best online learning experience tailored to your needs. Here’s why you should choose Knowhub for your educational journey:</p><br />
+            <div className="why-choose-container">
+                <p>Personalized learning paths that cater to your goals.</p>
+                <p>Easy-to-use platform for a seamless, distraction-free experience.</p>
+                <p>Access to a global network of educators and students for diverse perspectives.</p>
+                <p>Interactive and engaging content designed to keep you motivated.</p>
+            </div>
+
           </section>
   
           {/* Clear the Get Started Section */}
