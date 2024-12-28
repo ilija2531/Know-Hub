@@ -129,15 +129,20 @@
     margin-bottom: 20px;
   }
   
-  .why-choose ul {
-    list-style: none;
-    padding: 0;
-    font-size: 1.2rem;
-    color: #555;
+  .why-choose-container {
+    font-size: 1.1rem; /* Make the text larger */
+    line-height: 1.4; /* Optional: control the line spacing */
+    padding: 20px; /* Optional: add some padding inside the container */
   }
   
-  .why-choose ul li {
-    margin: 15px 0;
+  .why-choose-container p {
+    margin-bottom: 10px; /* Space between paragraphs */
+    transition: font-size 0.3s ease; /* Smooth transition for font size change */
+  }
+  
+  .why-choose-container p:hover {
+    font-size: 1.2rem; /* Increase font size on hover */
+    cursor: pointer;
   }
   
   /* Dark mode styles */
