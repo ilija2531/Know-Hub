@@ -19,6 +19,9 @@ builder.Logging.AddDebug();
 builder.Services.AddScoped<ICoursesRepository, CoursesRepositoryImplementation>();
 builder.Services.AddScoped<ICoursesService, CoursesServiceImplementation>();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
 // Add services to the container.
 
 builder.Services.AddControllers();

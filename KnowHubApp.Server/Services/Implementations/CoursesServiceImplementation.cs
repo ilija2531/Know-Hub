@@ -116,18 +116,7 @@ namespace KnowHubApp.Server.Services.Implementations
         {
             var searchedCoursesService = await _coursesRepository.SearchCourses(title);
 
-            var searchedCoursesDTO = searchedCoursesService.Select(c => new SearchedCourses
-
-            {
-                CourseEntityId = c.CourseEntityId,
-                Title = c.Title,
-                Description = c.Description,
-                Path = c.Path,
-                FullName = c.UserEntity.FullName
-
-            }
-
-            ).ToList();
+            var searchedCoursesDTO = _uploadProfileMapper.Map<List<SearchedCourses>>(searchedCoursesService);
 
             return searchedCoursesDTO;
         }
@@ -136,15 +125,7 @@ namespace KnowHubApp.Server.Services.Implementations
         {
             var theData = await _coursesRepository.GetUserDetails(id);
 
-            var theDataDTO = new ProfileDataDTO
-            {
-
-                Id = theData.Id,
-                FullName = theData.FullName,
-                UserName = theData.UserName,
-                Email = theData.Email
-
-            };
+            var theDataDTO = _uploadProfileMapper.Map<ProfileDataDTO>(theData);
 
             return theDataDTO;
         }
@@ -153,10 +134,7 @@ namespace KnowHubApp.Server.Services.Implementations
         {
             var details = await _coursesRepository.GetUserById(id);
 
-            details.FullName = profileDataDTO.FullName;
-            details.UserName = profileDataDTO.UserName;
-            details.Email = profileDataDTO.Email;
-            details.Id = id;
+            _uploadProfileMapper.Map(profileDataDTO, details);
 
             await _coursesRepository.UpdateUserDetails(details, id);
 

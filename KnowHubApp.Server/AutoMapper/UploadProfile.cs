@@ -35,7 +35,16 @@ namespace KnowHubApp.Server.AutoMapper
             CreateMap<UserEntity, ProfileDataDTO>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName))
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName));
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+                .ReverseMap();
+
+            CreateMap<CourseEntity, SearchedCourses>()
+                .ForMember(dest => dest.CourseEntityId, opt => opt.MapFrom(src => src.CourseEntityId))
+                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(dest => dest.Path, opt => opt.MapFrom(src => src.Path))
+                .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.UserEntity.FullName));
         }
 
     }
