@@ -160,14 +160,7 @@ namespace KnowHubApp.Server.Services.Implementations
 
             await _coursesRepository.UpdateUserDetails(details, id);
 
-            profileDataDTO = new ProfileDataDTO
-            {
-
-                Id = details.Id,
-                FullName = details.FullName,
-                UserName = details.UserName,
-
-            };
+            profileDataDTO = _uploadProfileMapper.Map<ProfileDataDTO>(details);
 
             return profileDataDTO;
         }
