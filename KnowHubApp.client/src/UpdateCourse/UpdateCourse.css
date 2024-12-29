@@ -1,0 +1,62 @@
+.update-course-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f3f3f3;
+  }
+  
+  .update-course-form {
+    background-color: #6a1b9a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    width: 400px;
+    text-align: center;
+  }
+  
+  .update-course-form h2 {
+    margin-bottom: 20px;
+  }
+  
+  .update-course-form label {
+    display: block;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  
+  .update-course-form input[type="text"],
+  .update-course-form textarea,
+  .update-course-form input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+  }
+  
+  .update-course-form textarea {
+    resize: none;
+    height: 100px;
+  }
+  
+  .update-course-form button {
+    background-color: #8e24aa;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .update-course-form button:hover {
+    background-color: #6a1b9a;
+  }
+  
+  .message {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+  
