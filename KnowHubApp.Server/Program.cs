@@ -25,6 +25,12 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -108,6 +114,8 @@ app.UseCors("AllowAll");
 app.UseAuthentication();  
 
 app.UseAuthorization();
+
+app.UseResponseCompression();
 
 app.MapControllers();
 
