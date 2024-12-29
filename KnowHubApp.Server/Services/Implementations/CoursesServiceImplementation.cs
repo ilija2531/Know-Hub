@@ -89,14 +89,7 @@ namespace KnowHubApp.Server.Services.Implementations
 
             await _coursesRepository.UpdateCourse(courseEntity, id);
 
-            return new UpdatedCourseDTO
-            {
-                UpdatedCourseDtoId = courseEntity.CourseEntityId,
-                Title = courseEntity.Title,
-                Description = courseEntity.Description,
-                Path = courseEntity.Path
-            };
-
+            return _uploadProfileMapper.Map<UpdatedCourseDTO>(courseEntity);
 
 
         }
