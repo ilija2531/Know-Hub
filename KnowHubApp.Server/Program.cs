@@ -29,6 +29,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()     
+              .AllowAnyMethod()      
+              .AllowAnyHeader();     
+    });
+});
+
 
 //Tuka se dodava AppDbContext vo container za dependency injection za da ni e dostapno sekade niz app, i se kazhuva deka kjese koristi sql server, i connection stringot.
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -73,18 +83,31 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
+
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
+} 
+else
+{
+    app.UseExceptionHandler(errorApp => errorApp.Run(async context =>
+    {
+        context.Response.StatusCode = 500;
+        context.Response.ContentType = "application/json";
+        await context.Response.WriteAsync("Something went wrong");
+    } ));
 }
-
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();    
-app.UseAuthorization();
+app.UseCors("AllowAll");
 
+app.UseAuthentication();  
+
+app.UseAuthorization();
 
 app.MapControllers();
 
