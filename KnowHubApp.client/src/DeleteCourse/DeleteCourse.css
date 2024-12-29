@@ -1,65 +1,73 @@
+/* Container Styling */
 .delete-course-container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #f5c2c7;
-    border-radius: 8px;
-    background-color: #f8d7da;
-    color: #842029;
-    font-family: Arial, sans-serif;
-  }
-  
-  .delete-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 16px;
-  }
-  
-  .endpoint {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 16px;
-  }
-  
-  .parameters-title {
-    font-size: 14px;
-    margin-bottom: 8px;
-  }
-  
-  .parameter-field {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
-  }
-  
-  .parameter-field label {
-    font-size: 14px;
-    margin-bottom: 4px;
-  }
-  
-  .parameter-field input {
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    outline: none;
-  }
-  
-  .parameter-field input:focus {
-    border-color: #842029;
-  }
-  
-  .delete-button {
-    background-color: #d9534f;
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    font-size: 14px;
-    border-radius: 4px;
-    cursor: pointer;
-    text-transform: none;
-  }
-  
-  .delete-button:hover {
-    background-color: #c9302c;
-  }
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f8f4ff; /* Light purple background */
+  border: 2px solid #a280e6; /* Medium purple border */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(160, 128, 230, 0.3); /* Subtle purple shadow */
+  font-family: "Arial", sans-serif;
+  color: #4b0082; /* Deep purple text */
+}
+
+/* Form */
+.delete-course-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Heading */
+.delete-course-container h2 {
+  text-align: center;
+  color: #6a0dad; /* Dark purple */
+  margin-bottom: 20px;
+}
+
+/* Label */
+.delete-course-form label {
+  font-size: 16px;
+  color: #4b0082; /* Deep purple */
+}
+
+/* Dropdown */
+.delete-course-form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d8bfd8; /* Light purple border */
+  border-radius: 5px;
+  background-color: #ffffff; /* White background */
+  font-size: 14px;
+  color: #4b0082; /* Deep purple */
+}
+
+/* Button */
+.delete-course-form button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #800080; /* Medium purple */
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Button hover */
+.delete-course-form button:hover {
+  background-color: #9932cc; /* Bright purple */
+}
+
+/* Message */
+.message {
+  text-align: center;
+  font-size: 14px;
+  color: #4b0082; /* Deep purple for success or neutral messages */
+}
+
+/* Error Message Styling */
+.message:has-text("Error") {
+  color: #ff4dff; /* Bright purple for errors */
+}

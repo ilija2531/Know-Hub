@@ -7,6 +7,8 @@ import MyCourses from "./pages/MyCourses/MyCourses.jsx";
 import Catalog from "./pages/Catalog/Catalog.jsx";
 import MyProfile from "./pages/MyProfile/MyProfile.jsx";
 import CourseCreationPage from "./CourseCreation/courseCreationPage.jsx";
+import DeleteCourse from "./DeleteCourse/DeleteCourse.jsx"
+import UpdateCourse from "./UpdateCourse/UpdateCourse.jsx"
 import SignUp from "./SignUp/SignUp.jsx";
 import Login from "./Login/Login.jsx";
 import { Route, Routes } from "react-router-dom";
@@ -34,6 +36,9 @@ function App() {
         <Route path="/myCourses" element={<MyCourses/>}/>
         <Route path="/catalog" element={<Catalog/>}/>
         <Route path="/myProfile" element={<MyProfile/>}/>
+        <Route path="/deletecourse" element={<DeleteCourse/>}/>
+        <Route path="/updatecourse" element={<UpdateCourse/>}/>
+        <Route path="/coursecreation" element={<CourseCreationPage/>}/>
       </Routes>
       <Footer/>
       </div>

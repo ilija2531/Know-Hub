@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 import search_icon from '../../assets/Navbar-sliki/search-1.png'; // Use a single search icon
 import light_mode from '../../assets/Navbar-sliki/day.png';
@@ -13,8 +13,8 @@ import logout_img from '../../assets/Navbar-sliki/logout.png';
 
 const Navbar = ({ theme = 'light', setTheme }) => { // Default theme to 'light'
   const [open, setOpen] = useState(false);
-
   const menuRef = useRef(null); // Initialize the ref
+  const location = useLocation(); // Get the current path
 
   // Close dropdown menu if clicked outside of it
   useEffect(() => {
@@ -51,6 +51,9 @@ const Navbar = ({ theme = 'light', setTheme }) => { // Default theme to 'light'
     );
   }
 
+  // Define the paths where the profile icon should not appear
+  const hideProfileIcon = location.pathname === '/' || location.pathname === '/welcome';
+
   return (
     <>
       <div className="navbar">
@@ -73,37 +76,39 @@ const Navbar = ({ theme = 'light', setTheme }) => { // Default theme to 'light'
           </li>
         </ul>
 
-        <div className="dropdown" ref={menuRef}> {/* Add ref to dropdown */}
-          <div className="dropdown-trigger" onClick={() => setOpen(!open)}>
-            <img className="account-img" src={account_img} alt="account" />
+        {!hideProfileIcon && ( // Conditionally render the profile icon
+          <div className="dropdown" ref={menuRef}> {/* Add ref to dropdown */}
+            <div className="dropdown-trigger" onClick={() => setOpen(!open)}>
+              <img className="account-img" src={account_img} alt="account" />
+            </div>
+            <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
+              <h3>Nikola Gruevski</h3>
+              <ul>
+                <Link to="/home">
+                  <DropdownItem img={home_img} text="Home" />
+                </Link>
+                <Link to="/myProfile">
+                  <DropdownItem img={account_img} text="My Profile" />
+                </Link>
+                <Link to="/catalog">
+                  <DropdownItem img={catalog_img} text="Catalog" />
+                </Link>
+                <Link to="/myCourses">
+                  <DropdownItem img={courses_img} text="My Courses" />
+                </Link>
+                <Link to="/logout">
+                  <DropdownItem img={logout_img} text="Logout" />
+                </Link>
+              </ul>
+              <img
+                className="toggle"
+                onClick={toggle_mode}
+                src={theme === 'light' ? dark_mode : light_mode}
+                alt="toggle-icon"
+              />
+            </div>
           </div>
-          <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
-            <h3>Nikola Gruevski</h3>
-            <ul>
-              <Link to="/home">
-                <DropdownItem img={home_img} text="Home" />
-              </Link>
-              <Link to="/myProfile">
-                <DropdownItem img={account_img} text="My Profile" />
-              </Link>
-              <Link to="/catalog">
-                <DropdownItem img={catalog_img} text="Catalog" />
-              </Link>
-              <Link to="/myCourses">
-                <DropdownItem img={courses_img} text="My Courses" />
-              </Link>
-              <Link to="/logout">
-                <DropdownItem img={logout_img} text="Logout" />
-              </Link>
-            </ul>
-            <img
-              className="toggle"
-              onClick={toggle_mode}
-              src={theme === 'light' ? dark_mode : light_mode}
-              alt="toggle-icon"
-            />
-          </div>
-        </div>
+        )}
       </div>
       <hr />
     </>
