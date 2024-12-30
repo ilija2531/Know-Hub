@@ -11,6 +11,7 @@ import DeleteCourse from "./DeleteCourse/DeleteCourse.jsx"
 import UpdateCourse from "./UpdateCourse/UpdateCourse.jsx"
 import SignUp from "./SignUp/SignUp.jsx";
 import Login from "./Login/Login.jsx";
+import Logout from "./Logout/Logout.jsx";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/deletecourse" element={<DeleteCourse/>}/>
         <Route path="/updatecourse" element={<UpdateCourse/>}/>
         <Route path="/coursecreation" element={<CourseCreationPage/>}/>
+        <Route path="/logout" element={<Logout/>}/>
       </Routes>
       </div>
       <Footer/>

@@ -162,3 +162,11 @@ h3 {
     margin-left: 10px;
     transition: var(--speed);
 }
+
+.dropdownItem span{
+    transition: var(--speed);
+}
+
+.dropdownItem span:hover{
+    color:rgb(215, 34, 12); ;
+}

@@ -99,15 +99,22 @@ const Navbar = ({ theme = 'light', setTheme }) => { // Default theme to 'light'
                 <Link to="/logout">
                   <DropdownItem img={logout_img} text="Logout" />
                 </Link>
+                <li onClick={toggle_mode} className="dropdownItem">
+                  <img src={theme === 'light' ? dark_mode : light_mode} alt="toggle-icon" />
+                  <span>Toggle Theme</span>
+                </li>
               </ul>
-              <img
-                className="toggle"
-                onClick={toggle_mode}
-                src={theme === 'light' ? dark_mode : light_mode}
-                alt="toggle-icon"
-              />
             </div>
           </div>
+        )}
+
+        {location.pathname === '/' && (
+          <img
+            className="toggle"
+            onClick={toggle_mode}
+            src={theme === 'light' ? dark_mode : light_mode}
+            alt="toggle-icon"
+          />
         )}
       </div>
       <hr />
