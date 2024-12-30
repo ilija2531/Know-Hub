@@ -12,22 +12,32 @@ const CourseCreationPage = () => {
     }
   };
 
-  const handleSave = () => {
-    console.log({
-      courseName,
-      description,
-      video,
-    });
-    alert('Course saved!');
-  };
+  const handlePublish = async () => {
+    if (!courseName || !description) {
+      alert('Please fill in all the fields and upload a video.');
+      return;
+    }
 
-  const handlePublish = () => {
-    console.log({
-      courseName,
-      description,
-      video,
-    });
-    alert('Course published!');
+    const formData = new FormData();
+    formData.append('Title', courseName);
+    formData.append('Description', description);
+    formData.append('CourseFile', video);
+
+    try {
+      const response = await fetch('/api/courses/uploadCourse', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        alert('Course published successfully!');
+      } else {
+        alert('Failed to publish course. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error publishing course:', error);
+      alert('An error occurred. Please try again later.');
+    }
   };
 
   return (
@@ -71,7 +81,17 @@ const CourseCreationPage = () => {
           {video && <p className="file-upload-feedback">Uploaded: {video.name}</p>}
         </div>
         <div className="button-container">
-          <button type="button" onClick={handleSave}>
+          <button
+            type="button"
+            onClick={() => {
+              console.log({
+                courseName,
+                description,
+                video,
+              });
+              alert('Course saved!');
+            }}
+          >
             Save
           </button>
           <button type="button" onClick={handlePublish}>

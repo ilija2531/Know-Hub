@@ -21,20 +21,6 @@ const Home = () => {
             Create a New Course
           </button>
         </div>
-        <main className="home-main">
-          <section className="home-section">
-            <h3>Programming Courses</h3>
-            <p>Explore courses to enhance your coding skills.</p>
-          </section>
-          <section className="home-section">
-            <h3>Sports Courses</h3>
-            <p>Discover ways to stay active and fit.</p>
-          </section>
-          <section className="home-section">
-            <h3>Language Courses</h3>
-            <p>Learn new languages and expand your communication skills.</p>
-          </section>
-        </main>
       </div>
     </div>
   );
