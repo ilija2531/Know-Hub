@@ -40,8 +40,8 @@ function App() {
         <Route path="/updatecourse" element={<UpdateCourse/>}/>
         <Route path="/coursecreation" element={<CourseCreationPage/>}/>
       </Routes>
-      <Footer/>
       </div>
+      <Footer/>
       </>
     );
 }

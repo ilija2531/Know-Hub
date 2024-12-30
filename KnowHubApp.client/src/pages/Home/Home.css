@@ -1,0 +1,78 @@
+/* Home.css */
+
+.home-container {
+    font-family: Arial, sans-serif;
+    color: #333;
+    padding: 20px;
+    line-height: 1.6;
+  }
+  
+  .home-header {
+    text-align: center;
+    margin-bottom: 30px; /* Added margin for spacing */
+  }
+  
+  .home-header h1 {
+    color: #62046d; /* Rich purple for the title */
+    font-size: 2.5rem;
+  }
+  
+  .courses-container {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    margin-top: 20px;
+  }
+  
+  .courses-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .courses-header h2 {
+    font-size: 2rem;
+    color: #62046d;
+  }
+  
+  .create-course-button {
+    background-color: #62046d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .create-course-button:hover {
+    background-color: #4e0358;
+  }
+  
+  .home-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .home-section {
+    border: 1px solid #a7709b; /* Subtle purple border */
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #f5eef8; /* Light purple background */
+  }
+  
+  .home-section h3 {
+    color: #62046d; /* Consistent purple tone */
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .home-section p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
