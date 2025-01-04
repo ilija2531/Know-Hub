@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import userName from '../assets/Account/username.png';
 import password from '../assets/Account/password.png';
@@ -6,6 +7,7 @@ import password from '../assets/Account/password.png';
 const Login = () => {
   const [Username, setUsername] = useState('');
   const [Password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     if (!Username || !Password) {
@@ -24,6 +26,7 @@ const Login = () => {
         const data = await response.json();
         alert('Login successful!');
         console.log(data); // Handle login response (e.g., token storage)
+        navigate('/home');
       } else {
         alert('Login failed. Please check your credentials.');
       }

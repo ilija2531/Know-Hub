@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
 import fullName from "../assets/Account/fullname.png";
 import mail from "../assets/Account/mail.png";
@@ -10,6 +11,7 @@ const SignUp = () => {
   const [Email, setEmail] = useState("");
   const [UserName, setUsername] = useState("");
   const [Password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSignUp = async () => {
     if (!FullName || !Email || !UserName || !Password) {
@@ -29,6 +31,7 @@ const SignUp = () => {
 
       if (response.ok) {
         alert("Sign up successful!");
+        navigate("/home");
       } else {
         alert("Sign up failed. Please try again.");
       }
