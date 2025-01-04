@@ -1,5 +1,3 @@
-
-
 .welcome-container {
     font-family: 'Roboto', sans-serif;
     background-color: white;
@@ -12,8 +10,9 @@
   }
 
   .hero-section {
-    background-color: white; /* Light background for hero section */
-    color: black; /* Dark text */
+    background-size: cover;
+    background-position: center;
+    color: white; /* Dark text */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,6 +23,20 @@
     transition: background-color 0.3s ease;
   }
   
+  .blur-background {
+    position: relative;
+    background-color: hsla(0, 0%, 0%, 0.2); /* Semi-transparent dark background */
+    backdrop-filter: blur(3.5px); /* Add blur effect */
+    border-radius: 20px; /* Rounded corners for the blur effect */
+    padding: 40px;
+    box-shadow: 0 20px 30px hsla(0, 0%, 0%, 0.2);
+    overflow: hidden; /* Keeps the blur effect within the border-radius */
+
+    /* Create a smoother edge transition */
+    mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0.5) 95%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0.5) 95%, rgba(0, 0, 0, 0) 100%);
+}
+
   .hero-content {
     z-index: 2;
     max-width: 900px;

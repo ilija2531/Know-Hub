@@ -1,20 +1,21 @@
 import React from 'react';
 import './Welcome.css';
-
+import backgroundImage from "../../assets/Welcome/home-background1.png";
 
 const Welcome = () => {
     return (
-        
       <div className="welcome-container">
-        <header className="hero-section">
+        <header className="hero-section" style={{ backgroundImage: `url(${backgroundImage})` }}>
           <div className="hero-content">
-            <h1 className="hero-title">Welcome to Knowhub</h1>
-            <p className="hero-subtitle">
-              The ultimate Learning Management System designed to empower you.
-            </p>
-            <p className="hero-description">
-              Whether you're a student, educator, or professional, Knowhub provides the tools to enhance your learning experience. Join us today to start your journey toward success!
-            </p>
+            <div className="blur-background">
+              <h1 className="hero-title">Welcome to Knowhub</h1>
+                <p className="hero-subtitle">
+                  The ultimate Learning Management System designed to empower you.
+                </p>
+                <p className="hero-description">
+                  Whether you're a student, educator, or professional, Knowhub provides the tools to enhance your learning experience. Join us today to start your journey toward success!
+                </p>
+            </div>
           </div>
         </header>
   
@@ -48,15 +49,7 @@ const Welcome = () => {
                 <p>Access to a global network of educators and students for diverse perspectives.</p>
                 <p>Interactive and engaging content designed to keep you motivated.</p>
             </div>
-
           </section>
-  
-          {/* Clear the Get Started Section */}
-          {/* <section className="get-started">
-            <h2 className="section-title">Get Started with Knowhub</h2>
-            <p>Ready to take your learning to the next level? Join Knowhub today and gain access to a world-class educational platform that will help you achieve your learning goals. Whether you're looking to learn new skills, advance your career, or simply explore new subjects, Knowhub has everything you need.</p>
-            <button className="cta-button">Sign Up Now</button>
-          </section> */}
   
           {/* Services Section */}
           <section className="services">
@@ -68,11 +61,7 @@ const Welcome = () => {
               </div>
               <div className="service-card">
                 <h3>🛠️ Course Customization Tools</h3>
-                <p>Unlock the power of flexibility with Knowhub's intuitive course customization tools. Whether you're creating a course for beginners or advanced learners, our platform allows you to easily adjust lesson content, pace, and assessments to suit the unique needs of your audience.
-
-
-
-</p>
+                <p>Unlock the power of flexibility with Knowhub's intuitive course customization tools. Whether you're creating a course for beginners or advanced learners, our platform allows you to easily adjust lesson content, pace, and assessments to suit the unique needs of your audience.</p>
               </div>
               <div className="service-card">
                 <h3>💬 Support</h3>
@@ -85,4 +74,4 @@ const Welcome = () => {
     );
   };
 
-export default Welcome
+export default Welcome;
