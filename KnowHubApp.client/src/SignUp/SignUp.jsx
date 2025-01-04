@@ -1,37 +1,40 @@
-import React, { useState } from 'react';
-import './SignUp.css';
-import FullName from '../assets/Account/fullname.png';
-import Mail from '../assets/Account/mail.png';
-import UserName from '../assets/Account/username.png';
-import Password from '../assets/Account/password.png';
+import { useState } from "react";
+import "./SignUp.css";
+import fullName from "../assets/Account/fullname.png";
+import mail from "../assets/Account/mail.png";
+import userName from "../assets/Account/username.png";
+import password from "../assets/Account/password.png";
 
 const SignUp = () => {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [FullName, setFullName] = useState("");
+  const [Email, setEmail] = useState("");
+  const [UserName, setUsername] = useState("");
+  const [Password, setPassword] = useState("");
 
   const handleSignUp = async () => {
-    if (!fullName || !email || !username || !password) {
-      alert('Please fill in all fields.');
+    if (!FullName || !Email || !UserName || !Password) {
+      alert("Please fill in all fields.");
       return;
     }
 
     try {
-      const response = await fetch('/api/accounts/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fullName, email, username, password }),
-      });
+      const response = await fetch(
+        "http://localhost:5188/api/accounts/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ FullName, Email, UserName, Password }),
+        }
+      );
 
       if (response.ok) {
-        alert('Sign up successful!');
+        alert("Sign up successful!");
       } else {
-        alert('Sign up failed. Please try again.');
+        alert("Sign up failed. Please try again.");
       }
     } catch (error) {
-      console.error('Error signing up:', error);
-      alert('An error occurred. Please try again later.');
+      console.error("Error signing up:", error);
+      alert("An error occurred. Please try again later.");
     }
   };
 
@@ -43,46 +46,46 @@ const SignUp = () => {
           <div className="underline"></div>
         </div>
         <div className="inputs">
-        <div className="input">
-            <img src={FullName} alt="" />
+          <div className="input">
+            <img src={fullName} alt="" />
             <input
-            type="text"
-            name="fullName"
-            placeholder="Full Name"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+              type="text"
+              name="FullName"
+              placeholder="Full Name"
+              value={FullName}
+              onChange={(e) => setFullName(e.target.value)}
             />
-        </div>
-        <div className="input">
-            <img src={Mail} alt="" />
+          </div>
+          <div className="input">
+            <img src={mail} alt="" />
             <input
-            type="email"
-            name="email"
-            placeholder="E-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              name="Email"
+              placeholder="E-mail"
+              value={Email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-        </div>
-        <div className="input">
-            <img src={UserName} alt="" />
+          </div>
+          <div className="input">
+            <img src={userName} alt="" />
             <input
-            type="text"
-            name="username"
-            placeholder="User Name"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+              type="text"
+              name="UserName"
+              placeholder="User Name"
+              value={UserName}
+              onChange={(e) => setUsername(e.target.value)}
             />
-        </div>
-        <div className="input">
-            <img src={Password} alt="" />
+          </div>
+          <div className="input">
+            <img src={password} alt="" />
             <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              name="Password"
+              placeholder="Password"
+              value={Password}
+              onChange={(e) => setPassword(e.target.value)}
             />
-        </div>
+          </div>
         </div>
         <div className="submit-container">
           <div className="submit" onClick={handleSignUp}>
