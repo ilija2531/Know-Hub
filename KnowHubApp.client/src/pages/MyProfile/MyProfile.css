@@ -1,0 +1,82 @@
+.profile-container {
+    padding: 40px;
+    max-width: 900px;
+    margin: auto;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.1);
+  }
+  
+  .profile-header-container {
+    background: #62046d;
+    padding: 50px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .profile-header-container h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0;
+    color: #fff;
+  }
+  
+  .profile-info-container {
+    padding: 30px;
+    margin-top: 20px;
+    border: 2px solid #62046d;
+    border-radius: 0 0 10px 10px;
+  }
+  
+  .profile-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .profile-field {
+    font-size: 20px;
+    line-height: 1.8;
+  }
+  
+  .profile-field strong {
+    font-weight: bold;
+    color: #62046d;
+  }
+  
+  .profile-field input {
+    font-size: 18px;
+    padding: 8px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #62046d;
+    width: 100%;
+  }
+  
+  .profile-field span {
+    display: inline-block;
+    margin-left: 10px;
+  }
+  
+  .buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .edit-button,
+  .save-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #62046d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .edit-button:hover,
+  .save-button:hover {
+    background-color: #4b0047;
+  }
+  
