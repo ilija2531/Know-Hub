@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./UpdateCourse.css";
-import { useParams } from "react-router-dom"; // Use this if passing the courseId via the URL.
+import { useParams } from "react-router-dom";
 
 const UpdateCourse = () => {
-  const { courseId } = useParams(); // Extract the courseId from the URL.
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [courseFile, setCourseFile] = useState(null);
-  const [message, setMessage] = useState("");
+  const { id } = useParams(); // Extract the courseId from the URL.
+  const [Title, setTitle] = useState("");
+  const [Description, setDescription] = useState("");
+  const [CourseFile, setCourseFile] = useState(null);
+  const [Message, setMessage] = useState("");
 
   useEffect(() => {
     // Fetch the current course details when the component loads
     const fetchCourseDetails = async () => {
       try {
-        const response = await axios.get(`/api/courses/${courseId}`);
+        const response = await axios.get(`http://localhost:5188/api/courses/updateCourse/${id}`);
         const { Title, Description } = response.data;
         setTitle(Title);
         setDescription(Description);
@@ -24,10 +24,10 @@ const UpdateCourse = () => {
       }
     };
 
-    if (courseId) {
+    if (id) {
       fetchCourseDetails();
     }
-  }, [courseId]);
+  }, [id]); // Fixed dependency array to include `id`
 
   const handleFileChange = (e) => {
     setCourseFile(e.target.files[0]);
@@ -36,22 +36,22 @@ const UpdateCourse = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!title || !description) {
-      setMessage("Title and Description are required.");
+    if (!Title || !Description) {
+      setMessage("Please fill in all required fields.");
       return;
     }
 
     const formData = new FormData();
-    formData.append("UpdateCourseDtoId", courseId);
-    formData.append("Title", title);
-    formData.append("Description", description);
-    if (courseFile) {
-      formData.append("CourseFile", courseFile);
+    formData.append("UpdateCourseDtoId", id);
+    formData.append("Title", Title);
+    formData.append("Description", Description);
+    if (CourseFile) {
+      formData.append("CourseFile", CourseFile);
     }
 
     try {
-      const response = await axios.put(
-        `/api/courses/updateCourse/${courseId}`,
+      await axios.put(
+        `/api/courses/updateCourse/${id}`, // Fixed the URL to use `id`
         formData,
         {
           headers: {
@@ -62,7 +62,7 @@ const UpdateCourse = () => {
       setMessage("Course updated successfully!");
     } catch (error) {
       setMessage("Error updating the course. Please try again.");
-      console.error(error);
+      console.error("Error updating the course:", error);
     }
   };
 
@@ -74,15 +74,17 @@ const UpdateCourse = () => {
           Title:
           <input
             type="text"
-            value={title}
+            value={Title}
             onChange={(e) => setTitle(e.target.value)}
+            required
           />
         </label>
         <label>
           Description:
           <textarea
-            value={description}
+            value={Description}
             onChange={(e) => setDescription(e.target.value)}
+            required
           ></textarea>
         </label>
         <label>
@@ -90,7 +92,7 @@ const UpdateCourse = () => {
           <input type="file" onChange={handleFileChange} />
         </label>
         <button type="submit">Update Course</button>
-        {message && <p className="message">{message}</p>}
+        {Message && <p className="message">{Message}</p>}
       </form>
     </div>
   );

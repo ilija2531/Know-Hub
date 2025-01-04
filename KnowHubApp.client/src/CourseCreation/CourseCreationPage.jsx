@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import './CourseCreationPage.css';
 
 const CourseCreationPage = () => {
-  const [courseName, setCourseName] = useState('');
-  const [description, setDescription] = useState('');
-  const [video, setVideo] = useState(null);
+  const [CourseName, setCourseName] = useState('');
+  const [Description, setDescription] = useState('');
+  const [Video, setVideo] = useState(null);
 
   const handleVideoUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -13,18 +13,18 @@ const CourseCreationPage = () => {
   };
 
   const handlePublish = async () => {
-    if (!courseName || !description) {
+    if (!CourseName || !Description) {
       alert('Please fill in all the fields and upload a video.');
       return;
     }
 
     const formData = new FormData();
-    formData.append('Title', courseName);
-    formData.append('Description', description);
-    formData.append('CourseFile', video);
+    formData.append('Title', CourseName);
+    formData.append('Description', Description);
+    formData.append('CourseFile', Video);
 
     try {
-      const response = await fetch('/api/courses/uploadCourse', {
+      const response = await fetch('http://localhost:5188/api/courses/uploadCourse', {
         method: 'POST',
         body: formData,
       });
@@ -53,7 +53,7 @@ const CourseCreationPage = () => {
           <input
             type="text"
             id="courseName"
-            value={courseName}
+            value={CourseName}
             onChange={(e) => setCourseName(e.target.value)}
             placeholder="Enter course name"
             required
@@ -63,7 +63,7 @@ const CourseCreationPage = () => {
           <label htmlFor="description">Course Description:</label>
           <textarea
             id="description"
-            value={description}
+            value={Description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Enter course description"
             required
@@ -78,16 +78,16 @@ const CourseCreationPage = () => {
             accept="video/*"
             onChange={handleVideoUpload}
           />
-          {video && <p className="file-upload-feedback">Uploaded: {video.name}</p>}
+          {Video && <p className="file-upload-feedback">Uploaded: {Video.name}</p>}
         </div>
         <div className="button-container">
           <button
             type="button"
             onClick={() => {
               console.log({
-                courseName,
-                description,
-                video,
+                CourseName,
+                Description,
+                Video,
               });
               alert('Course saved!');
             }}

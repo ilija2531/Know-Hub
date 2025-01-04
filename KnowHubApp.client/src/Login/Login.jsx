@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import './Login.css';
-import UserName from '../assets/Account/username.png';
-import Password from '../assets/Account/password.png';
+import userName from '../assets/Account/username.png';
+import password from '../assets/Account/password.png';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [Username, setUsername] = useState('');
+  const [Password, setPassword] = useState('');
 
   const handleLogin = async () => {
-    if (!username || !password) {
+    if (!Username || !Password) {
       alert('Please fill in all fields.');
       return;
     }
 
     try {
-      const response = await fetch('/api/accounts/login', {
+      const response = await fetch("http://localhost:5188/api/accounts/login", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ Username, Password }),
       });
 
       if (response.ok) {
@@ -42,22 +42,22 @@ const Login = () => {
         </div>
         <div className="inputs">
           <div className="input">
-            <img src={UserName} alt="" />
+            <img src={userName} alt="" />
             <input
               type="text"
               name="username"
               placeholder="User Name"
-              value={username}
+              value={Username}
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className="input">
-            <img src={Password} alt="" />
+            <img src={password} alt="" />
             <input
               type="password"
               name="password"
               placeholder="Password"
-              value={password}
+              value={Password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>

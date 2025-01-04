@@ -1,73 +1,70 @@
-/* Container Styling */
+/* DeleteCourse.css */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f0ff; /* Soft purple background */
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
 .delete-course-container {
-  max-width: 500px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #f8f4ff; /* Light purple background */
-  border: 2px solid #a280e6; /* Medium purple border */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(160, 128, 230, 0.3); /* Subtle purple shadow */
-  font-family: "Arial", sans-serif;
-  color: #4b0082; /* Deep purple text */
-}
-
-/* Form */
-.delete-course-form {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f0ff; /* Light purple background */
 }
 
-/* Heading */
-.delete-course-container h2 {
+.delete-course-form {
+  background: #ffffff; /* White background */
+  border: 2px solid #b085f5; /* Purple border */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
   text-align: center;
-  color: #6a0dad; /* Dark purple */
+}
+
+h2 {
+  color: #6a1b9a; /* Deep purple */
   margin-bottom: 20px;
 }
 
-/* Label */
-.delete-course-form label {
-  font-size: 16px;
-  color: #4b0082; /* Deep purple */
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #6a1b9a; /* Deep purple */
 }
 
-/* Dropdown */
-.delete-course-form select {
+input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #d8bfd8; /* Light purple border */
-  border-radius: 5px;
-  background-color: #ffffff; /* White background */
+  padding: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #b085f5; /* Purple border */
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
   font-size: 14px;
-  color: #4b0082; /* Deep purple */
 }
 
-/* Button */
-.delete-course-form button {
-  width: 100%;
-  padding: 10px;
+button {
+  background-color: #6a1b9a; /* Deep purple */
+  color: #fff;
   border: none;
-  border-radius: 5px;
-  background-color: #800080; /* Medium purple */
-  color: white;
+  padding: 10px 20px;
   font-size: 16px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s;
 }
 
-/* Button hover */
-.delete-course-form button:hover {
-  background-color: #9932cc; /* Bright purple */
+button:hover {
+  background-color: #8e24aa; /* Lighter purple */
 }
 
-/* Message */
 .message {
-  text-align: center;
+  margin-top: 20px;
   font-size: 14px;
-  color: #4b0082; /* Deep purple for success or neutral messages */
-}
-
-/* Error Message Styling */
-.message:has-text("Error") {
-  color: #ff4dff; /* Bright purple for errors */
+  color: #6a1b9a; /* Deep purple */
 }
