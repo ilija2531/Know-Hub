@@ -1,38 +1,40 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Login.css';
-import userName from '../assets/Account/username.png';
-import password from '../assets/Account/password.png';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthContext/AuthContext"; // Update path to point to AuthContext folder
+import "./Login.css";
+import userName from "../assets/Account/username.png";
+import password from "../assets/Account/password.png";
 
 const Login = () => {
-  const [Username, setUsername] = useState('');
-  const [Password, setPassword] = useState('');
+  const [Username, setUsername] = useState("");
+  const [Password, setPassword] = useState("");
+  const { saveToken } = useAuth(); // Access saveToken from context
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     if (!Username || !Password) {
-      alert('Please fill in all fields.');
+      alert("Please fill in all fields.");
       return;
     }
 
     try {
       const response = await fetch("http://localhost:5188/api/accounts/login", {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ Username, Password }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        alert('Login successful!');
-        console.log(data); // Handle login response (e.g., token storage)
-        navigate('/home');
+        saveToken(data.token); // Save the token in the context
+        alert("Login successful!");
+        navigate("/home");
       } else {
-        alert('Login failed. Please check your credentials.');
+        alert("Login failed. Please check your credentials.");
       }
     } catch (error) {
-      console.error('Error logging in:', error);
-      alert('An error occurred. Please try again later.');
+      console.error("Error logging in:", error);
+      alert("An error occurred. Please try again later.");
     }
   };
 

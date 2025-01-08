@@ -5,6 +5,7 @@ import fullName from "../assets/Account/fullname.png";
 import mail from "../assets/Account/mail.png";
 import userName from "../assets/Account/username.png";
 import password from "../assets/Account/password.png";
+import { useAuth } from "../AuthContext/AuthContext"; // Import the useAuth hook
 
 const SignUp = () => {
   const [FullName, setFullName] = useState("");
@@ -12,6 +13,7 @@ const SignUp = () => {
   const [UserName, setUsername] = useState("");
   const [Password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { setAuthToken } = useAuth(); // Access the setAuthToken function from context
 
   const handleSignUp = async () => {
     if (!FullName || !Email || !UserName || !Password) {
@@ -30,6 +32,8 @@ const SignUp = () => {
       );
 
       if (response.ok) {
+        const data = await response.json();
+        setAuthToken(data.token); // Use context to store the token
         alert("Sign up successful!");
         navigate("/home");
       } else {
