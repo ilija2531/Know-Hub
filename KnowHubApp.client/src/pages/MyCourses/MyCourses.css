@@ -1,7 +1,70 @@
-.dark h1{
-    color: #fff;
-
-}
-.dark p{
-    color: #fff;
-}
+/* Main container for the MyCourses component */
+.my-courses-container {
+    padding: 20px;
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    color: #4b0082; /* Deep purple text */
+    min-height: 100vh;
+  }
+  
+  .my-courses-container h2 {
+    font-size: 2rem;
+    text-align: center;
+    color: #6a0dad; /* Deep purple for headings */
+  }
+  
+  .courses-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .course-card {
+    background-color: #f8f8ff; /* Light purple background for the card */
+    border-radius: 8px;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    text-align: center;
+  }
+  
+  .course-card:hover {
+    transform: translateY(-10px); /* Hover effect to lift the card */
+  }
+  
+  .course-card h3 {
+    font-size: 1.5rem;
+    color: #6a0dad; /* Deep purple text for course name */
+    margin-bottom: 10px;
+  }
+  
+  .course-card p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .course-card button {
+    background-color: #6a0dad; /* Deep purple button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .course-card button:hover {
+    background-color: #520e7e; /* Darker purple on hover */
+  }
+  
+  .error-message {
+    color: #e74c3c; /* Red error message */
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 20px;
+  }
+  

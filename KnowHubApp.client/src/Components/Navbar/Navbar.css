@@ -44,13 +44,17 @@ ul li {
 }
 
 .search-box input {
-    padding: 3px;
+    padding: 3px 10px 5px;
     background: transparent;
     border: 0;
     outline: 0;
     color: #fff;
     font-size: 18px;
     max-width: 200px;
+    line-height: 0.5;
+    margin-right: 10px;
+    transform: translateY(8px);
+    
 }
 
 .search-box img {
@@ -61,6 +65,10 @@ ul li {
 
 .search-box input::placeholder {
     color: #fff;
+    line-height: 1;
+    transform: translateY(3px);
+    
+    
 }
 
 .dark .navbar {

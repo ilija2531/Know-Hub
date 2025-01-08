@@ -1,22 +1,36 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
-import search_icon from '../../assets/Navbar-sliki/search-1.png'; // Use a single search icon
+import search_icon from '../../assets/Navbar-sliki/search-1.png';
 import light_mode from '../../assets/Navbar-sliki/day.png';
 import dark_mode from '../../assets/Navbar-sliki/night.png';
 import logo_img from '../../assets/Navbar-sliki/logo1.png';
 import account_img from '../../assets/Navbar-sliki/account.png';
 import home_img from '../../assets/Navbar-sliki/home.png';
-import catalog_img from '../../assets/Navbar-sliki/catalog.png';
 import courses_img from '../../assets/Navbar-sliki/myCourses.png';
 import logout_img from '../../assets/Navbar-sliki/logout.png';
 
-const Navbar = ({ theme = 'light', setTheme }) => { // Default theme to 'light'
+const Navbar = ({ theme = 'light', setTheme }) => {
   const [open, setOpen] = useState(false);
-  const menuRef = useRef(null); // Initialize the ref
-  const location = useLocation(); // Get the current path
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState('');
+  const menuRef = useRef(null);
+  const location = useLocation();
 
-  // Close dropdown menu if clicked outside of it
+  useEffect(() => {
+    // Check if the user is logged in
+    const token = localStorage.getItem('authToken'); // Assuming token is stored in localStorage
+    const user = JSON.parse(localStorage.getItem('user')); // Assuming user data is stored
+
+    if (token && user) {
+      setIsLoggedIn(true);
+      setUserName(user.name || 'User'); // Default to 'User' if name is unavailable
+    } else {
+      setIsLoggedIn(false);
+      setUserName('user123');
+    }
+  }, []);
+
   useEffect(() => {
     const handler = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -24,22 +38,18 @@ const Navbar = ({ theme = 'light', setTheme }) => { // Default theme to 'light'
       }
     };
 
-    document.addEventListener("mousedown", handler);
-
-    // Cleanup event listener on unmount
+    document.addEventListener('mousedown', handler);
     return () => {
-      document.removeEventListener("mousedown", handler);
+      document.removeEventListener('mousedown', handler);
     };
-  }, []); // Empty dependency array to run this effect only once
+  }, []);
 
-  // Toggle theme between light and dark
   const toggle_mode = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
-  // Apply the theme to the document body when the theme changes
   useEffect(() => {
-    document.body.className = theme; // Apply the theme class to the body
+    document.body.className = theme;
   }, [theme]);
 
   function DropdownItem(props) {
@@ -51,47 +61,47 @@ const Navbar = ({ theme = 'light', setTheme }) => { // Default theme to 'light'
     );
   }
 
-  // Define the paths where the profile icon should not appear
   const hideProfileIcon = location.pathname === '/' || location.pathname === '/welcome';
+  const hideSearchBox = location.pathname === '/';
 
   return (
     <>
       <div className="navbar">
-        <img src={theme === 'light' ? logo_img : logo_img} className="logoImg" alt="logo" />
-        <div className="search-box">
-          <input type="text" placeholder="Search" />
-          <img
-            src={search_icon} // Always use the same icon
-            alt="search icon"
-            className="search-icon"
-          />
-        </div>
+        <Link to="/home">
+          <img src={logo_img} className="logoImg" alt="logo" />
+        </Link>
 
-        <ul>
-          <li>
-            <Link to="/signup">Sign Up</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-        </ul>
+        {!hideSearchBox && (
+          <div className="search-box">
+            <input type="text" placeholder="Search" />
+            <img src={search_icon} alt="search icon" className="search-icon" />
+          </div>
+        )}
 
-        {!hideProfileIcon && ( // Conditionally render the profile icon
-          <div className="dropdown" ref={menuRef}> {/* Add ref to dropdown */}
+        {!isLoggedIn ? (
+          <ul>
+            <li>
+              <Link to="/signup">Sign Up</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          </ul>
+        ) : null}
+
+        {!hideProfileIcon && (
+          <div className="dropdown" ref={menuRef}>
             <div className="dropdown-trigger" onClick={() => setOpen(!open)}>
               <img className="account-img" src={account_img} alt="account" />
             </div>
             <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
-              <h3>Nikola Gruevski</h3>
+              {!isLoggedIn && <h3>{userName}</h3>}
               <ul>
                 <Link to="/home">
                   <DropdownItem img={home_img} text="Home" />
                 </Link>
                 <Link to="/myProfile">
                   <DropdownItem img={account_img} text="My Profile" />
-                </Link>
-                <Link to="/catalog">
-                  <DropdownItem img={catalog_img} text="Catalog" />
                 </Link>
                 <Link to="/myCourses">
                   <DropdownItem img={courses_img} text="My Courses" />

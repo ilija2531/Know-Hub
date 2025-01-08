@@ -81,19 +81,6 @@ const CourseCreationPage = () => {
           {Video && <p className="file-upload-feedback">Uploaded: {Video.name}</p>}
         </div>
         <div className="button-container">
-          <button
-            type="button"
-            onClick={() => {
-              console.log({
-                CourseName,
-                Description,
-                Video,
-              });
-              alert('Course saved!');
-            }}
-          >
-            Save
-          </button>
           <button type="button" onClick={handlePublish}>
             Publish
           </button>

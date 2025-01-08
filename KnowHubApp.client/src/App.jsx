@@ -4,7 +4,6 @@ import Footer from "./Components/Footer/Footer.jsx";
 import Home from "./pages/Home/Home.jsx";
 import Welcome from "./pages/Welcome/Welcome.jsx";
 import MyCourses from "./pages/MyCourses/MyCourses.jsx";
-import Catalog from "./pages/Catalog/Catalog.jsx";
 import MyProfile from "./pages/MyProfile/MyProfile.jsx";
 import CourseCreationPage from "./CourseCreation/courseCreationPage.jsx";
 import DeleteCourse from "./DeleteCourse/DeleteCourse.jsx"
@@ -35,7 +34,6 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/home" element={<Home/>}/>
         <Route path="/myCourses" element={<MyCourses/>}/>
-        <Route path="/catalog" element={<Catalog/>}/>
         <Route path="/myProfile" element={<MyProfile/>}/>
         <Route path="/deletecourse" element={<DeleteCourse/>}/>
         <Route path="/updatecourse" element={<UpdateCourse/>}/>
