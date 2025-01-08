@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
+import { AuthContext } from '../../AuthContext/AuthContext'; // Corrected path
 
 const Home = () => {
   const [courses, setCourses] = useState([]);
   const navigate = useNavigate();
+  const { token } = useContext(AuthContext); // Using context
 
   const navigateToCourseCreation = () => {
     navigate('/courseCreation');
@@ -13,7 +15,14 @@ const Home = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch('http://localhost:5188/api/courses/fetchCourses');
+        const response = await fetch('http://localhost:5188/api/courses/fetchCourses', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
         if (response.ok) {
           const data = await response.json();
           setCourses(data);
@@ -26,7 +35,7 @@ const Home = () => {
     };
 
     fetchCourses();
-  }, []);
+  }, [token]); // Dependency on token
 
   return (
     <div className="home-container">

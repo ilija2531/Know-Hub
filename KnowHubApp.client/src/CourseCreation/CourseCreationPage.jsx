@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './CourseCreationPage.css';
+import { AuthContext } from '../AuthContext/AuthContext'; // Corrected path
 
 const CourseCreationPage = () => {
   const [CourseName, setCourseName] = useState('');
   const [Description, setDescription] = useState('');
   const [Video, setVideo] = useState(null);
+  const { token } = useContext(AuthContext); // Using context to get the token
 
   const handleVideoUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -26,6 +28,9 @@ const CourseCreationPage = () => {
     try {
       const response = await fetch('http://localhost:5188/api/courses/uploadCourse', {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`, // Sending token in the request header
+        },
         body: formData,
       });
 
