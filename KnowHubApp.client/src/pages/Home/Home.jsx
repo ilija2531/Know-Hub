@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
-import { AuthContext } from '../../AuthContext/AuthContext'; // Corrected path
+import { useAuth } from '../../AuthContext/AuthContext'; // Corrected path and import
 
 const Home = () => {
   const [courses, setCourses] = useState([]);
   const navigate = useNavigate();
-  const { token } = useContext(AuthContext); // Using context
+  const { token } = useAuth(); // Correctly using the hook
 
   const navigateToCourseCreation = () => {
     navigate('/courseCreation');

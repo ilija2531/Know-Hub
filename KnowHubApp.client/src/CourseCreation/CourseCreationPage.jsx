@@ -1,12 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import './CourseCreationPage.css';
-import { AuthContext } from '../AuthContext/AuthContext'; // Corrected path
+import { useAuth } from '../AuthContext/AuthContext'; // Corrected import
 
 const CourseCreationPage = () => {
   const [CourseName, setCourseName] = useState('');
   const [Description, setDescription] = useState('');
   const [Video, setVideo] = useState(null);
-  const { token } = useContext(AuthContext); // Using context to get the token
+  const { token } = useAuth(); // Correctly using the hook to get the token
 
   const handleVideoUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
