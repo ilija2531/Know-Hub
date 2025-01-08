@@ -61,8 +61,9 @@ const Navbar = ({ theme = 'light', setTheme }) => {
     );
   }
 
-  const hideProfileIcon = location.pathname === '/' || location.pathname === '/welcome';
+  const hideProfileIcon = location.pathname === '/' || location.pathname === '/signup' || location.pathname === '/login';
   const hideSearchBox = location.pathname === '/';
+  const showThemeToggle = ['/signup', '/login', '/'].includes(location.pathname); 
 
   return (
     <>
@@ -118,7 +119,7 @@ const Navbar = ({ theme = 'light', setTheme }) => {
           </div>
         )}
 
-        {location.pathname === '/' && (
+        {showThemeToggle &&  (
           <img
             className="toggle"
             onClick={toggle_mode}
