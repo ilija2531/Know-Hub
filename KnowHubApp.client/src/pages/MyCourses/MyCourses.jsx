@@ -13,7 +13,7 @@ const MyCourses = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get(`/api/courses/fetchUserCourses/${id}`);
+        const response = await axios.get(`http://localhost:5188/api/courses/fetchUserCourses/${id}`);
         if (response.data && Array.isArray(response.data)) {
           setCourses(response.data); // Store the fetched courses
         } else {

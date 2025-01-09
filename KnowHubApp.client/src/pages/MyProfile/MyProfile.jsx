@@ -16,7 +16,7 @@ const MyProfile = ({ id }) => {
     const fetchUserData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`/api/courses/fetchUserDetails/${id}`);
+        const response = await fetch(`http://localhost:5188/api/courses/fetchUserDetails/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch user data.");
         }
@@ -53,7 +53,7 @@ const MyProfile = ({ id }) => {
   const handleSave = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/courses/updateUserDetails/${id}`, {
+      const response = await fetch(`http://localhost:5188/api/courses/updateUserDetails/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
