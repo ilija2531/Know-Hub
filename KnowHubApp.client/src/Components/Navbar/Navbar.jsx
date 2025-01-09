@@ -1,35 +1,31 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import './Navbar.css';
-import search_icon from '../../assets/Navbar-sliki/search-1.png';
-import light_mode from '../../assets/Navbar-sliki/day.png';
-import dark_mode from '../../assets/Navbar-sliki/night.png';
-import logo_img from '../../assets/Navbar-sliki/logo1.png';
-import account_img from '../../assets/Navbar-sliki/account.png';
-import home_img from '../../assets/Navbar-sliki/home.png';
-import courses_img from '../../assets/Navbar-sliki/myCourses.png';
-import logout_img from '../../assets/Navbar-sliki/logout.png';
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../../AuthContext/AuthContext"; // Use AuthContext for authentication logic
+import "./Navbar.css";
+import search_icon from "../../assets/Navbar-sliki/search-1.png";
+import light_mode from "../../assets/Navbar-sliki/day.png";
+import dark_mode from "../../assets/Navbar-sliki/night.png";
+import logo_img from "../../assets/Navbar-sliki/logo1.png";
+import account_img from "../../assets/Navbar-sliki/account.png";
+import home_img from "../../assets/Navbar-sliki/home.png";
+import courses_img from "../../assets/Navbar-sliki/myCourses.png";
+import logout_img from "../../assets/Navbar-sliki/logout.png";
 
-const Navbar = ({ theme = 'light', setTheme }) => {
+const Navbar = ({ theme = "light", setTheme }) => {
   const [open, setOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState("user123");
   const menuRef = useRef(null);
   const location = useLocation();
+  const { token, logout } = useAuth(); // Use AuthContext for authentication state
+
+  const isLoggedIn = !!token;
 
   useEffect(() => {
-    // Check if the user is logged in
-    const token = localStorage.getItem('authToken'); // Assuming token is stored in localStorage
-    const user = JSON.parse(localStorage.getItem('user')); // Assuming user data is stored
-
-    if (token && user) {
-      setIsLoggedIn(true);
-      setUserName(user.name || 'User'); // Default to 'User' if name is unavailable
-    } else {
-      setIsLoggedIn(false);
-      setUserName('user123');
+    if (isLoggedIn) {
+      const user = JSON.parse(localStorage.getItem("user")); // Fetch user info from localStorage
+      setUserName(user?.name || "User");
     }
-  }, []);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const handler = (e) => {
@@ -37,33 +33,36 @@ const Navbar = ({ theme = 'light', setTheme }) => {
         setOpen(false);
       }
     };
-
-    document.addEventListener('mousedown', handler);
+    document.addEventListener("mousedown", handler);
     return () => {
-      document.removeEventListener('mousedown', handler);
+      document.removeEventListener("mousedown", handler);
     };
   }, []);
 
-  const toggle_mode = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  const toggleMode = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
   useEffect(() => {
     document.body.className = theme;
   }, [theme]);
 
-  function DropdownItem(props) {
+  function DropdownItem({ img, text, onClick }) {
     return (
-      <li className="dropdownItem">
-        <img src={props.img} alt={props.text} />
-        <span>{props.text}</span>
+      <li className="dropdownItem" onClick={onClick}>
+        <img src={img} alt={text} />
+        <span>{text}</span>
       </li>
     );
   }
 
-  const hideProfileIcon = location.pathname === '/' || location.pathname === '/signup' || location.pathname === '/login';
-  const hideSearchBox = location.pathname === '/';
-  const showThemeToggle = ['/signup', '/login', '/'].includes(location.pathname); 
+  const hideProfileIcon =
+    location.pathname === "/" ||
+    location.pathname === "/signup" ||
+    location.pathname === "/login";
+  const hideSearchBox = location.pathname === "/";
+  const showThemeToggle =
+    ["/signup", "/login", "/"].includes(location.pathname);
 
   return (
     <>
@@ -95,8 +94,8 @@ const Navbar = ({ theme = 'light', setTheme }) => {
             <div className="dropdown-trigger" onClick={() => setOpen(!open)}>
               <img className="account-img" src={account_img} alt="account" />
             </div>
-            <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
-              {!isLoggedIn && <h3>{userName}</h3>}
+            <div className={`dropdown-menu ${open ? "active" : "inactive"}`}>
+              {isLoggedIn && <h3>{userName}</h3>}
               <ul>
                 <Link to="/home">
                   <DropdownItem img={home_img} text="Home" />
@@ -107,11 +106,16 @@ const Navbar = ({ theme = 'light', setTheme }) => {
                 <Link to="/myCourses">
                   <DropdownItem img={courses_img} text="My Courses" />
                 </Link>
-                <Link to="/logout">
-                  <DropdownItem img={logout_img} text="Logout" />
-                </Link>
-                <li onClick={toggle_mode} className="dropdownItem">
-                  <img src={theme === 'light' ? dark_mode : light_mode} alt="toggle-icon" />
+                <DropdownItem
+                  img={logout_img}
+                  text="Logout"
+                  onClick={logout}
+                />
+                <li onClick={toggleMode} className="dropdownItem">
+                  <img
+                    src={theme === "light" ? dark_mode : light_mode}
+                    alt="toggle-icon"
+                  />
                   <span>Toggle Theme</span>
                 </li>
               </ul>
@@ -119,11 +123,11 @@ const Navbar = ({ theme = 'light', setTheme }) => {
           </div>
         )}
 
-        {showThemeToggle &&  (
+        {showThemeToggle && (
           <img
             className="toggle"
-            onClick={toggle_mode}
-            src={theme === 'light' ? dark_mode : light_mode}
+            onClick={toggleMode}
+            src={theme === "light" ? dark_mode : light_mode}
             alt="toggle-icon"
           />
         )}
