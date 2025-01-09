@@ -15,7 +15,7 @@ const CourseCreationPage = () => {
   };
 
   const handlePublish = async () => {
-    if (!CourseName || !Description) {
+    if (!CourseName || !Description || !Video) {
       alert('Please fill in all the fields and upload a video.');
       return;
     }
@@ -35,7 +35,9 @@ const CourseCreationPage = () => {
       });
 
       if (response.ok) {
+        const data = await response.json();
         alert('Course published successfully!');
+        // Redirect to home or another page if necessary
       } else {
         alert('Failed to publish course. Please try again.');
       }

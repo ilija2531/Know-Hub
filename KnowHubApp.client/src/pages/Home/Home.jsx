@@ -55,6 +55,14 @@ const Home = () => {
               <div key={course.id} className="course-card">
                 <h3>{course.title}</h3>
                 <p>{course.description}</p>
+                {course.videoUrl && (
+                  <div className="course-video">
+                    <video width="320" height="240" controls>
+                      <source src={`http://localhost:5188/${course.videoUrl}`} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                )}
               </div>
             ))
           ) : (
