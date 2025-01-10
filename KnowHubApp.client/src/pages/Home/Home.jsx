@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
-import { useAuth } from '../../AuthContext/AuthContext'; // Corrected path and import
+import { useAuth } from '../../AuthContext/AuthContext';
 
 const Home = () => {
   const [courses, setCourses] = useState([]);
   const navigate = useNavigate();
-  const { token } = useAuth(); // Correctly using the hook
-
-  const navigateToCourseCreation = () => {
-    navigate('/courseCreation');
-  };
+  const { token } = useAuth();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -35,7 +31,11 @@ const Home = () => {
     };
 
     fetchCourses();
-  }, [token]); // Dependency on token
+  }, [token]);
+
+  const handleCourseClick = (courseId) => {
+    navigate(`/course/${courseId}`);
+  };
 
   return (
     <div className="home-container">
@@ -45,14 +45,14 @@ const Home = () => {
       <div className="courses-container">
         <div className="courses-header">
           <h2>Courses</h2>
-          <button className="create-course-button" onClick={navigateToCourseCreation}>
+          <button className="create-course-button" onClick={() => navigate('/courseCreation')}>
             Create a New Course
           </button>
         </div>
         <div className="courses-list">
           {courses.length > 0 ? (
             courses.map((course) => (
-              <div key={course.id} className="course-card">
+              <div key={course.id} className="course-card" onClick={() => handleCourseClick(course.id)}>
                 <h3>{course.title}</h3>
                 <p>{course.description}</p>
                 {course.videoUrl && (
