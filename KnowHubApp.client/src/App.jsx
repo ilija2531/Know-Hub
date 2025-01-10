@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar.jsx';
 import Footer from './Components/Footer/Footer.jsx';
@@ -15,18 +15,22 @@ import Logout from './Logout/Logout.jsx';
 import SingleCourse from './pages/SingleCourse/SingleCourse.jsx';
 
 function App() {
-  const current_theme = localStorage.getItem('current_theme');
-  const [theme, setTheme] = useState(current_theme ? current_theme : 'light');
+  // Initialize theme from localStorage or fallback to 'light'
+  const current_theme = localStorage.getItem('current_theme') || 'light';
+  const [theme, setTheme] = useState(current_theme);
 
+  // Update localStorage whenever theme changes
   useEffect(() => {
     localStorage.setItem('current_theme', theme);
   }, [theme]);
 
   return (
     <>
+      {/* Apply the theme to the main container */}
       <div className={`container ${theme}`}>
         <Navbar theme={theme} setTheme={setTheme} />
         <Routes>
+          {/* Define all application routes */}
           <Route path="/" element={<Welcome />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
@@ -38,6 +42,9 @@ function App() {
           <Route path="/coursecreation" element={<CourseCreationPage />} />
           <Route path="/course/:id" element={<SingleCourse />} />
           <Route path="/logout" element={<Logout />} />
+
+          {/* Catch-all route for undefined paths */}
+          <Route path="*" element={<h1>404 - Page Not Found</h1>} />
         </Routes>
       </div>
       <Footer />
