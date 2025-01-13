@@ -1,49 +1,56 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f0ff; /* Soft purple background */
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
 .delete-course-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f3f3f3;
+  background-color: #f5f0ff; /* Light purple background */
 }
 
 .delete-course-message {
-  background-color: #b71c1c;
+  background: #ffffff; /* White background */
+  border: 2px solid #b085f5; /* Purple border */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  color: #ffffff;
-  width: 90%;
-  max-width: 400px;
+  width: 300px;
   text-align: center;
 }
 
-.delete-course-message h2 {
+h2 {
+  color: #6a1b9a; /* Deep purple */
   margin-bottom: 20px;
 }
 
-.delete-button {
-  background-color: #d32f2f;
-  color: #ffffff;
+button {
+  background-color: #6a1b9a; /* Deep purple */
+  color: #fff;
   border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
+  padding: 10px 20px;
   font-size: 16px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.delete-button:hover {
-  background-color: #b71c1c;
-  transform: scale(1.05);
+button:hover {
+  background-color: #8e24aa; /* Lighter purple */
 }
 
 .message {
-  margin-top: 15px;
+  margin-top: 20px;
   font-size: 14px;
-  font-weight: bold;
+  color: #6a1b9a; /* Deep purple */
 }
 
-/* Differentiate success and error messages */
+/* Success and error message colors */
 .message.success {
   color: #4caf50; /* Green for success */
 }
