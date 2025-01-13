@@ -1,70 +1,53 @@
-/* DeleteCourse.css */
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f0ff; /* Soft purple background */
-  color: #333;
-  margin: 0;
-  padding: 0;
-}
-
 .delete-course-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f5f0ff; /* Light purple background */
+  background-color: #f3f3f3;
 }
 
-.delete-course-form {
-  background: #ffffff; /* White background */
-  border: 2px solid #b085f5; /* Purple border */
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.delete-course-message {
+  background-color: #b71c1c;
   padding: 20px;
-  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  width: 90%;
+  max-width: 400px;
   text-align: center;
 }
 
-h2 {
-  color: #6a1b9a; /* Deep purple */
+.delete-course-message h2 {
   margin-bottom: 20px;
 }
 
-label {
-  display: block;
-  margin-bottom: 10px;
-  color: #6a1b9a; /* Deep purple */
-}
-
-input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 20px;
-  border: 1px solid #b085f5; /* Purple border */
-  border-radius: 4px;
-  background: #fff;
-  color: #333;
-  font-size: 14px;
-}
-
-button {
-  background-color: #6a1b9a; /* Deep purple */
-  color: #fff;
+.delete-button {
+  background-color: #d32f2f;
+  color: #ffffff;
   border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 4px;
+  padding: 10px 15px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
-  background-color: #8e24aa; /* Lighter purple */
+.delete-button:hover {
+  background-color: #b71c1c;
+  transform: scale(1.05);
 }
 
 .message {
-  margin-top: 20px;
+  margin-top: 15px;
   font-size: 14px;
-  color: #6a1b9a; /* Deep purple */
+  font-weight: bold;
+}
+
+/* Differentiate success and error messages */
+.message.success {
+  color: #4caf50; /* Green for success */
+}
+
+.message.error {
+  color: #f44336; /* Red for error */
 }
