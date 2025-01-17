@@ -1,77 +1,73 @@
-import React, { useEffect, useState } from 'react';
+// Home.jsx
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Home.css';
-import { useAuth } from '../../AuthContext/AuthContext';
+import { AuthContext } from '../../AuthContext/AuthContext'; // Correct import
+import './Home.css'; // Import styles for the Home component
 
-const Home = () => {
+function Home() {
   const [courses, setCourses] = useState([]);
+  const { token } = useContext(AuthContext); // Get the token from AuthContext
   const navigate = useNavigate();
-  const { token } = useAuth();
+
+  // Handle navigation to a specific course when clicked
+  const handleCourseClick = (courseId) => {
+    navigate(`/course/${courseId}`); // Navigate to the course details page
+  };
 
   useEffect(() => {
+    // Fetch available courses from the API
     const fetchCourses = async () => {
       try {
         const response = await fetch('http://localhost:5188/api/courses/fetchCourses', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`, // Use the token from AuthContext
           },
         });
 
         if (response.ok) {
-          const data = await response.json();
-          setCourses(data);
+          const data = await response.json(); // Parse the JSON response
+          setCourses(data); // Update the courses state
         } else {
-          console.error('Failed to fetch courses');
+          console.error('Failed to fetch courses:', await response.text());
         }
       } catch (error) {
-        console.error('Error fetching courses:', error);
+        console.error('Error fetching courses:', error); // Log any network or other errors
       }
     };
 
-    fetchCourses();
+    fetchCourses(); // Call the function to fetch courses
   }, [token]);
-
-  const handleCourseClick = (courseId) => {
-    navigate(`/course/${courseId}`);
-  };
 
   return (
     <div className="home-container">
-      <header className="home-header">
-        <h1>Explore Your Learning Journey</h1>
-      </header>
-      <div className="courses-container">
-        <div className="courses-header">
-          <h2>Courses</h2>
-          <button className="create-course-button" onClick={() => navigate('/courseCreation')}>
-            Create a New Course
-          </button>
-        </div>
-        <div className="courses-list">
-          {courses.length > 0 ? (
-            courses.map((course) => (
-              <div key={course.id} className="course-card" onClick={() => handleCourseClick(course.id)}>
-                <h3>{course.title}</h3>
-                <p>{course.description}</p>
-                {course.videoUrl && (
-                  <div className="course-video">
-                    <video width="320" height="240" controls>
-                      <source src={`http://localhost:5188/${course.videoUrl}`} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                  </div>
-                )}
+      <h1 className="home-header">Available Courses</h1>
+      {/* Render the list of courses if available */}
+      <div className="courses-grid">
+        {courses.length > 0 ? (
+          courses.map((course) => (
+            <div
+              key={course.id}
+              className="course-card"
+              onClick={() => handleCourseClick(course.id)}
+            >
+              <div className="course-banner">
+                <video
+                  src={course.videoUrl}
+                  className="course-video"
+                  controls
+                ></video>
               </div>
-            ))
-          ) : (
-            <p>No courses available. Create a new course to get started!</p>
-          )}
-        </div>
+              <div className="course-title">{course.title}</div>
+            </div>
+          ))
+        ) : (
+          <p>No courses available.</p> // Display a message if no courses are found
+        )}
       </div>
     </div>
   );
-};
+}
 
 export default Home;

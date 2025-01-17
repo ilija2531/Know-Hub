@@ -1,3 +1,4 @@
+// AuthContext.jsx
 import React, { createContext, useState, useContext } from "react";
 
 const AuthContext = createContext();
@@ -22,4 +23,7 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+// Export the context and the useAuth hook
+export const useAuth = () => useContext(AuthContext); // Export this hook
+
+export { AuthContext }; // Ensure it's exported too

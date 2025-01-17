@@ -6,7 +6,7 @@ import Home from './pages/Home/Home.jsx';
 import Welcome from './pages/Welcome/Welcome.jsx';
 import MyCourses from './pages/MyCourses/MyCourses.jsx';
 import MyProfile from './pages/MyProfile/MyProfile.jsx';
-import CourseCreationPage from './CourseCreation/courseCreationPage.jsx';
+import CourseCreationPage from './CourseCreation/CourseCreationPage.jsx';
 import DeleteCourse from './DeleteCourse/DeleteCourse.jsx';
 import UpdateCourse from './UpdateCourse/UpdateCourse.jsx';
 import SignUp from './SignUp/SignUp.jsx';
