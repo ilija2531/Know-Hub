@@ -69,7 +69,7 @@ namespace KnowHubApp.Server.Controllers
             
         }
 
-        [Authorize]
+       
         [HttpGet("fetchCourses")]
         public async Task<List<ShowAllDTO>> ShowAll()
         {
