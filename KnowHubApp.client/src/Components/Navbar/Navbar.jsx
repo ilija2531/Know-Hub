@@ -16,7 +16,7 @@ const Navbar = ({ theme = "light", setTheme }) => {
   const [userName, setUserName] = useState("user123");
   const menuRef = useRef(null);
   const location = useLocation();
-  const { token, logout } = useAuth(); // Use AuthContext for authentication state
+  const { token} = useAuth(); // Use AuthContext for authentication state
 
   const isLoggedIn = !!token;
 
@@ -106,11 +106,12 @@ const Navbar = ({ theme = "light", setTheme }) => {
                 <Link to="/myCourses">
                   <DropdownItem img={courses_img} text="My Courses" />
                 </Link>
+                <Link to="/logout">
                 <DropdownItem
                   img={logout_img}
                   text="Logout"
-                  onClick={logout}
-                />
+                  />
+                  </Link>
                 <li onClick={toggleMode} className="dropdownItem">
                   <img
                     src={theme === "light" ? dark_mode : light_mode}
