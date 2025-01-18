@@ -4,10 +4,10 @@ import "./MyProfile.css";
 const MyProfile = ({ id }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    Id: "",
-    UserName: "",
-    Email: "",
-    FullName: ""
+    id: "",
+    userName: "",
+    email: "",
+    fullName: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -16,16 +16,18 @@ const MyProfile = ({ id }) => {
     const fetchUserData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`http://localhost:5188/api/courses/fetchUserDetails/${id}`);
+        const response = await fetch(
+          `http://localhost:5188/api/courses/fetchUserDetails/${id}`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch user data.");
         }
         const data = await response.json();
         setFormData({
-          Id: data.Id,
-          UserName: data.UserName,
-          Email: data.Email,
-          FullName: data.FullName
+          id: data.id,
+          userName: data.userName,
+          email: data.email,
+          fullName: data.fullName,
         });
         setError("");
       } catch (err) {
@@ -42,7 +44,7 @@ const MyProfile = ({ id }) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -53,13 +55,16 @@ const MyProfile = ({ id }) => {
   const handleSave = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:5188/api/courses/updateUserDetails/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-      });
+      const response = await fetch(
+        `http://localhost:5188/api/courses/updateUserDetails/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to update user details.");
@@ -91,11 +96,11 @@ const MyProfile = ({ id }) => {
                 <input
                   type="text"
                   name="FullName"
-                  value={formData.FullName}
+                  value={formData.fullName}
                   onChange={handleInputChange}
                 />
               ) : (
-                <span>{formData.FullName}</span>
+                <span>{formData.fullName}</span>
               )}
             </div>
             <div className="profile-field">
@@ -104,11 +109,11 @@ const MyProfile = ({ id }) => {
                 <input
                   type="email"
                   name="Email"
-                  value={formData.Email}
+                  value={formData.email}
                   onChange={handleInputChange}
                 />
               ) : (
-                <span>{formData.Email}</span>
+                <span>{formData.email}</span>
               )}
             </div>
             <div className="profile-field">
@@ -117,11 +122,11 @@ const MyProfile = ({ id }) => {
                 <input
                   type="text"
                   name="UserName"
-                  value={formData.UserName}
+                  value={formData.userName}
                   onChange={handleInputChange}
                 />
               ) : (
-                <span>{formData.UserName}</span>
+                <span>{formData.userName}</span>
               )}
             </div>
           </div>
