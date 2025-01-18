@@ -78,7 +78,7 @@ const Navbar = ({ theme = "light", setTheme }) => {
           </div>
         )}
 
-        {!isLoggedIn ? (
+       
           <ul>
             <li>
               <Link to="/signup">Sign Up</Link>
@@ -87,7 +87,7 @@ const Navbar = ({ theme = "light", setTheme }) => {
               <Link to="/login">Login</Link>
             </li>
           </ul>
-        ) : null}
+       
 
         {!hideProfileIcon && (
           <div className="dropdown" ref={menuRef}>
