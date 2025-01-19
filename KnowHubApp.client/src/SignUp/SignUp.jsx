@@ -13,7 +13,7 @@ const SignUp = () => {
   const [UserName, setUsername] = useState("");
   const [Password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { setAuthToken } = useAuth(); // Access the setAuthToken function from context
+  const { saveToken } = useAuth(); // Use saveToken function from context
 
   const handleSignUp = async () => {
     if (!FullName || !Email || !UserName || !Password) {
@@ -33,9 +33,15 @@ const SignUp = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setAuthToken(data.token); // Use context to store the token
-        alert("Sign up successful!");
-        navigate("/home");
+
+        // Ensure the token is present in the response
+        if (data.token) {
+          saveToken(data.token); // Save the token using context
+          alert("Sign up successful!");
+          navigate("/home");
+        } else {
+          alert("Sign up successful, but no token received.");
+        }
       } else {
         alert("Sign up failed. Please try again.");
       }
@@ -46,61 +52,55 @@ const SignUp = () => {
   };
 
   return (
-    <>
-      <div className="container-signup">
-        <div className="header">
-          <div className="text">Sign Up</div>
-          <div className="underline"></div>
+    <div className="container-signup">
+      <div className="header">
+        <div className="text">Sign Up</div>
+        <div className="underline"></div>
+      </div>
+      <div className="inputs">
+        <div className="input">
+          <img src={fullName} alt="Full Name" />
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={FullName}
+            onChange={(e) => setFullName(e.target.value)}
+          />
         </div>
-        <div className="inputs">
-          <div className="input">
-            <img src={fullName} alt="" />
-            <input
-              type="text"
-              name="FullName"
-              placeholder="Full Name"
-              value={FullName}
-              onChange={(e) => setFullName(e.target.value)}
-            />
-          </div>
-          <div className="input">
-            <img src={mail} alt="" />
-            <input
-              type="email"
-              name="Email"
-              placeholder="E-mail"
-              value={Email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="input">
-            <img src={userName} alt="" />
-            <input
-              type="text"
-              name="UserName"
-              placeholder="User Name"
-              value={UserName}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div className="input">
-            <img src={password} alt="" />
-            <input
-              type="password"
-              name="Password"
-              placeholder="Password"
-              value={Password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+        <div className="input">
+          <img src={mail} alt="Email" />
+          <input
+            type="email"
+            placeholder="E-mail"
+            value={Email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
-        <div className="submit-container">
-          <div className="submit" onClick={handleSignUp}>
-            Sign Up
-          </div>
+        <div className="input">
+          <img src={userName} alt="User Name" />
+          <input
+            type="text"
+            placeholder="User Name"
+            value={UserName}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="input">
+          <img src={password} alt="Password" />
+          <input
+            type="password"
+            placeholder="Password"
+            value={Password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
       </div>
-    </>
+      <div className="submit-container">
+        <div className="submit" onClick={handleSignUp}>
+          Sign Up
+        </div>
+      </div>
+    </div>
   );
 };
 
