@@ -1,5 +1,3 @@
-/* Home.css */
-
 .home-container {
   font-family: Arial, sans-serif;
   color: #333;
@@ -7,14 +5,31 @@
   line-height: 1.6;
 }
 
-.home-header {
-  text-align: center;
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 30px; /* Added margin for spacing */
 }
 
-.home-header h1 {
+.home-header {
   color: #62046d; /* Rich purple for the title */
   font-size: 2.5rem;
+}
+
+.add-course-button {
+  background-color: #62046d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-course-button:hover {
+  background-color: #4e0358;
 }
 
 .courses-container {
@@ -35,21 +50,6 @@
 .courses-header h2 {
   font-size: 2rem;
   color: #62046d;
-}
-
-.create-course-button {
-  background-color: #62046d;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.create-course-button:hover {
-  background-color: #4e0358;
 }
 
 .home-main {
@@ -76,7 +76,6 @@
   color: #555;
 }
 
-/* New styles for the courses grid and cards */
 .courses-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive layout */

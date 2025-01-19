@@ -42,7 +42,7 @@ const MyCourses = () => {
   return (
     <div className="my-courses-container">
       <h2>Your Courses</h2>
-      {isLoading ? (
+      {loading ? (
         <p>Loading...</p>
       ) : error ? (
         <p className="error-message">{error}</p>

@@ -1,4 +1,3 @@
-// Home.jsx
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthContext/AuthContext'; // Correct import
@@ -12,6 +11,11 @@ function Home() {
   // Handle navigation to a specific course when clicked
   const handleCourseClick = (courseId) => {
     navigate(`/course/${courseId}`); // Navigate to the course details page
+  };
+
+  // Navigate to course creation page
+  const handleAddCourse = () => {
+    navigate('/coursecreation'); // Navigate to CourseCreationPage
   };
 
   useEffect(() => {
@@ -42,7 +46,14 @@ function Home() {
 
   return (
     <div className="home-container">
-      <h1 className="home-header">Available Courses</h1>
+      <div className="header-container">
+        <h1 className="home-header">Available Courses</h1>
+        {/* Add Course Button */}
+        <button className="add-course-button" onClick={handleAddCourse}>
+          Add Course
+        </button>
+      </div>
+
       {/* Render the list of courses if available */}
       <div className="courses-grid">
         {courses.length > 0 ? (
