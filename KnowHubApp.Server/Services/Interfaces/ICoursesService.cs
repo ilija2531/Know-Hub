@@ -10,6 +10,8 @@ namespace KnowHubApp.Server.Services.Interfaces
 
         Task<List<ShowAllDTO>> ShowAll();
 
+        Task<SpecificCourseDTO> SpecificCourse(Guid id);
+
         Task<string> DeleteCourse (Guid Id);
 
         Task<UpdatedCourseDTO> UpdateCourse(UpdateCourseDTO updateCourseDTO, Guid id);
@@ -21,6 +23,5 @@ namespace KnowHubApp.Server.Services.Interfaces
         Task<ProfileDataDTO> GetProfileData (string id);
 
         Task<ProfileDataDTO> UpdateUserDetails(ProfileDataDTO profileDataDTO, string id);
-
     }
 }

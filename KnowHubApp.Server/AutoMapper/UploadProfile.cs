@@ -51,6 +51,14 @@ namespace KnowHubApp.Server.AutoMapper
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
                 .ForMember(dest => dest.Path, opt => opt.MapFrom(src => src.Path));
+
+            CreateMap<CourseEntity, SpecificCourseDTO>()
+                .ForMember(dest => dest.CourseDTOID, opt => opt.MapFrom(src => src.CourseEntityId))
+                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(dest => dest.Path, opt => opt.MapFrom(src => src.Path));
+
+
         }
 
     }

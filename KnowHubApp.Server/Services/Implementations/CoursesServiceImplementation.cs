@@ -53,6 +53,14 @@ namespace KnowHubApp.Server.Services.Implementations
             return courseDTO;
         }
 
+        public async Task<SpecificCourseDTO> SpecificCourse(Guid id)
+        {
+            var course = await _coursesRepository.SpecificCourse(id);
+            var returnedCourse = _uploadProfileMapper.Map<SpecificCourseDTO>(course);
+
+            return returnedCourse;
+        }
+
         public async Task<string> DeleteCourse(Guid Id)
         {
             await _coursesRepository.DeleteCourse(Id);
@@ -64,7 +72,7 @@ namespace KnowHubApp.Server.Services.Implementations
 
         public async Task<UpdatedCourseDTO> UpdateCourse(UpdateCourseDTO updateCourseDTO, Guid id)
         {
-            var courseEntity = await _coursesRepository.GetCourseById(id);
+            var courseEntity = await _coursesRepository.SpecificCourse(id);
 
             if (updateCourseDTO.CourseFile != null)
             {

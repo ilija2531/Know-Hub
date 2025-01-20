@@ -38,7 +38,7 @@ namespace KnowHubApp.Server.Repositories.Implementations
             return "Course deleted successfully ";
         }
 
-        public async Task<CourseEntity> GetCourseById(Guid id)
+        public async Task<CourseEntity> SpecificCourse(Guid id)
         {
             return await _appDbContext.Courses.FirstOrDefaultAsync(c => c.CourseEntityId == id);
         }

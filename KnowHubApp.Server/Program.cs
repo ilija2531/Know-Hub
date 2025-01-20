@@ -8,6 +8,7 @@ using KnowHubApp.Server.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -86,6 +87,7 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 
 
 var app = builder.Build();
+
 
 
 // Configure the HTTP request pipeline.

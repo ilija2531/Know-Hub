@@ -85,17 +85,32 @@ namespace KnowHubApp.Server.Controllers
             }
         }
 
+        [HttpGet("fetchSpecificCourse/{id}")]
+        public async Task<SpecificCourseDTO> SpecificCourse(Guid id)
+        {
+            var fetchedCourse = await _coursesService.SpecificCourse(id);
+
+            if (fetchedCourse == null)
+            {
+                return new SpecificCourseDTO();
+            }
+            else
+            {
+                return fetchedCourse;
+            }
+        }
+
         [Authorize]
         [HttpGet("fetchUserCourses/{id}")]
         public async Task<List<UserCourses>> GetUserCourses(string id)
         {
-            var fetchedCoureses = await _coursesService.GetUserCourses(id);
-            if (fetchedCoureses == null)
+            var fetchedCourses = await _coursesService.GetUserCourses(id);
+            if (fetchedCourses == null)
             {
                 return new List<UserCourses>();
             } else
             {
-                return fetchedCoureses;
+                return fetchedCourses;
             }
             
         }
