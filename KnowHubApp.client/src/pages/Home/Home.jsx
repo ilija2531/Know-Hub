@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../AuthContext/AuthContext';
-import './Home.css';
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../AuthContext/AuthContext";
+import "./Home.css";
 
 function Home() {
   // State to store the list of courses
@@ -10,34 +10,37 @@ function Home() {
   const navigate = useNavigate(); // Hook for navigation
 
   // Handle course click to navigate to the course details page
-  const handleCourseClick = (courseId) => {
-    navigate(`/course/${courseId}`);
+  const handleCourseClick = (courseDTOID) => {
+    navigate(`/courses/${courseDTOID}`);
   };
 
   // Handle navigation to the course creation page
   const handleAddCourse = () => {
-    navigate('/coursecreation');
+    navigate("/coursecreation");
   };
 
   // Fetch the list of courses from the API
   const fetchCourses = async () => {
     try {
-      const response = await fetch('http://localhost:5188/api/courses/fetchCourses', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`, // Attach token for authentication
-        },
-      });
+      const response = await fetch(
+        "http://localhost:5188/api/courses/fetchCourses",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Attach token for authentication
+          },
+        }
+      );
 
       if (response.ok) {
         const data = await response.json(); // Parse response data
         setCourses(data); // Update state with courses
       } else {
-        console.error('Failed to fetch courses:', await response.text()); // Log error
+        console.error("Failed to fetch courses:", await response.text()); // Log error
       }
     } catch (error) {
-      console.error('Error fetching courses:', error); // Handle request error
+      console.error("Error fetching courses:", error); // Handle request error
     }
   };
 
@@ -60,14 +63,14 @@ function Home() {
         {courses.length > 0 ? (
           courses.map((course) => (
             <div
-              key={course.id}
+              key={course.courseDTOID}
               className="course-card"
-              onClick={() => handleCourseClick(course.id)}
+              onClick={() => handleCourseClick(course.courseDTOID)}
             >
               <div className="course-banner">
                 {/* Video preview for the course */}
                 <video
-                  src={course.videoUrl}
+                  src={course.path}
                   className="course-video"
                   controls
                 ></video>
