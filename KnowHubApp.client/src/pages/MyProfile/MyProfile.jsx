@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../AuthContext"; // Import AuthContext for token
 import "./MyProfile.css";
 
 const MyProfile = ({ id }) => {
+  const { token } = useAuth(); // Get the token from AuthContext
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     id: "",
@@ -17,7 +19,12 @@ const MyProfile = ({ id }) => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `http://localhost:5188/api/courses/fetchUserDetails/${id}`
+          `http://localhost:5188/api/courses/fetchUserDetails/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Add token to headers
+            },
+          }
         );
         if (!response.ok) {
           throw new Error("Failed to fetch user data.");
@@ -38,7 +45,7 @@ const MyProfile = ({ id }) => {
     };
 
     fetchUserData();
-  }, [id]);
+  }, [id, token]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -50,34 +57,6 @@ const MyProfile = ({ id }) => {
 
   const toggleEditMode = () => {
     setIsEditing(!isEditing);
-  };
-
-  const handleSave = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch(
-        `http://localhost:5188/api/courses/updateUserDetails/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to update user details.");
-      }
-
-      console.log("User details updated successfully.");
-      setError("");
-      setIsEditing(false); // Exit edit mode after saving
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-    }
   };
 
   return (
@@ -95,7 +74,7 @@ const MyProfile = ({ id }) => {
               {isEditing ? (
                 <input
                   type="text"
-                  name="FullName"
+                  name="fullName" // Ensure name matches API field
                   value={formData.fullName}
                   onChange={handleInputChange}
                 />
@@ -108,7 +87,7 @@ const MyProfile = ({ id }) => {
               {isEditing ? (
                 <input
                   type="email"
-                  name="Email"
+                  name="email" // Ensure name matches API field
                   value={formData.email}
                   onChange={handleInputChange}
                 />
@@ -121,7 +100,7 @@ const MyProfile = ({ id }) => {
               {isEditing ? (
                 <input
                   type="text"
-                  name="UserName"
+                  name="userName" // Ensure name matches API field
                   value={formData.userName}
                   onChange={handleInputChange}
                 />
@@ -135,11 +114,6 @@ const MyProfile = ({ id }) => {
           <button onClick={toggleEditMode} className="edit-button">
             {isEditing ? "Cancel" : "Edit"}
           </button>
-          {isEditing && (
-            <button onClick={handleSave} className="save-button">
-              Save Changes
-            </button>
-          )}
         </div>
       </div>
     </div>
