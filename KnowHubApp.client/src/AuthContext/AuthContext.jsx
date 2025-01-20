@@ -1,18 +1,21 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext } from 'react';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(localStorage.getItem("token") || null);
+  // State to store the authentication token
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
 
+  // Function to save the token to state and localStorage
   const saveToken = (newToken) => {
     setToken(newToken);
-    localStorage.setItem("token", newToken); // Save to localStorage
+    localStorage.setItem('token', newToken); // Save token for persistence
   };
 
+  // Function to log out and clear the token
   const logout = () => {
     setToken(null);
-    localStorage.removeItem("token");
+    localStorage.removeItem('token'); // Remove token from localStorage
   };
 
   return (
@@ -22,7 +25,7 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Hook for consuming the AuthContext
+// Custom hook to access AuthContext
 export const useAuth = () => useContext(AuthContext);
 
 export { AuthContext };

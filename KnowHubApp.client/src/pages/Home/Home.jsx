@@ -1,61 +1,62 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../AuthContext/AuthContext'; // Correct import
-import './Home.css'; // Import styles for the Home component
+import { AuthContext } from '../../AuthContext/AuthContext';
+import './Home.css';
 
 function Home() {
+  // State to store the list of courses
   const [courses, setCourses] = useState([]);
-  const { token } = useContext(AuthContext); // Get the token from AuthContext
-  const navigate = useNavigate();
+  const { token } = useContext(AuthContext); // Access token from AuthContext
+  const navigate = useNavigate(); // Hook for navigation
 
-  // Handle navigation to a specific course when clicked
+  // Handle course click to navigate to the course details page
   const handleCourseClick = (courseId) => {
-    navigate(`/course/${courseId}`); // Navigate to the course details page
+    navigate(`/course/${courseId}`);
   };
 
-  // Navigate to course creation page
+  // Handle navigation to the course creation page
   const handleAddCourse = () => {
-    navigate('/coursecreation'); // Navigate to CourseCreationPage
+    navigate('/coursecreation');
   };
 
-  useEffect(() => {
-    // Fetch available courses from the API
-    const fetchCourses = async () => {
-      try {
-        const response = await fetch('http://localhost:5188/api/courses/fetchCourses', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`, // Use the token from AuthContext
-          },
-        });
+  // Fetch the list of courses from the API
+  const fetchCourses = async () => {
+    try {
+      const response = await fetch('http://localhost:5188/api/courses/fetchCourses', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // Attach token for authentication
+        },
+      });
 
-        if (response.ok) {
-          const data = await response.json(); // Parse the JSON response
-          setCourses(data); // Update the courses state
-        } else {
-          console.error('Failed to fetch courses:', await response.text());
-        }
-      } catch (error) {
-        console.error('Error fetching courses:', error); // Log any network or other errors
+      if (response.ok) {
+        const data = await response.json(); // Parse response data
+        setCourses(data); // Update state with courses
+      } else {
+        console.error('Failed to fetch courses:', await response.text()); // Log error
       }
-    };
+    } catch (error) {
+      console.error('Error fetching courses:', error); // Handle request error
+    }
+  };
 
-    fetchCourses(); // Call the function to fetch courses
+  // Fetch courses when the component is mounted or token changes
+  useEffect(() => {
+    fetchCourses();
   }, [token]);
 
   return (
     <div className="home-container">
       <div className="header-container">
         <h1 className="home-header">Available Courses</h1>
-        {/* Add Course Button */}
         <button className="add-course-button" onClick={handleAddCourse}>
           Add Course
         </button>
       </div>
 
-      {/* Render the list of courses if available */}
       <div className="courses-grid">
+        {/* Render the list of courses */}
         {courses.length > 0 ? (
           courses.map((course) => (
             <div
@@ -64,6 +65,7 @@ function Home() {
               onClick={() => handleCourseClick(course.id)}
             >
               <div className="course-banner">
+                {/* Video preview for the course */}
                 <video
                   src={course.videoUrl}
                   className="course-video"
@@ -74,7 +76,7 @@ function Home() {
             </div>
           ))
         ) : (
-          <p>No courses available.</p> // Display a message if no courses are found
+          <p>No courses available.</p> // Message for empty course list
         )}
       </div>
     </div>
