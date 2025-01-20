@@ -44,7 +44,7 @@ function Home() {
   // Fetch courses when the component is mounted or token changes
   useEffect(() => {
     fetchCourses();
-  }, [token]);
+  }, []);
 
   return (
     <div className="home-container">
