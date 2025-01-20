@@ -2,6 +2,7 @@
     padding: 40px;
     max-width: 900px;
     margin: auto;
+    margin-top: 50px;
     background: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.1);
@@ -50,12 +51,14 @@
     margin-left: 10px;
     border-radius: 5px;
     border: 1px solid #62046d;
+    color: #000;
     width: 100%;
   }
   
   .profile-field span {
     display: inline-block;
     margin-left: 10px;
+
   }
   
   .buttons-container {

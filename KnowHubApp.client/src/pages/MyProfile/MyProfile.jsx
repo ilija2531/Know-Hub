@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from "../AuthContext"; // Import AuthContext for token
+import { useAuth } from "../../AuthContext/AuthContext.jsx"; // Import AuthContext for token
 import "./MyProfile.css";
 
 const MyProfile = ({ id }) => {
