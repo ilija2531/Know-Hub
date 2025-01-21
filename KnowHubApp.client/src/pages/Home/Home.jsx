@@ -70,7 +70,7 @@ function Home() {
               <div className="course-banner">
                 {/* Video preview for the course */}
                 <video
-                  src={course.path}
+                  src={`http://localhost:5188${course.path}`}
                   className="course-video"
                   controls
                 ></video>

@@ -46,7 +46,8 @@ function SingleCourse() {
   return (
     <div className="single-course-container">
       <div className="video-container">
-        <video src={course.path} controls /> {/* Display the course video */}
+        <video src={`http://localhost:5188${course.path}`} controls />{" "}
+        {/* Display the course video */}
       </div>
       <div className="course-header">
         <h1>{course.title}</h1> {/* Display the course title */}
