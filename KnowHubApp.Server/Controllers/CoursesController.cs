@@ -132,22 +132,7 @@ namespace KnowHubApp.Server.Controllers
 
         }
 
-        [Authorize]
-        [HttpGet("fetchUserDetails/{id}")]
-        public async Task<ProfileDataDTO> GetProfileData(string id)
-        {
-            var fetchedDetails = await _coursesService.GetProfileData(id);
-
-            if (fetchedDetails == null)
-            {
-                return new ProfileDataDTO();
-            } 
-            else
-            {
-                return fetchedDetails;
-            }
-
-        }
+        
 
         [Authorize]
         [HttpPut("updateUserDetails/{id}")]

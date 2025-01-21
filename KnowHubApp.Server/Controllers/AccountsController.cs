@@ -4,6 +4,8 @@ using KnowHubApp.Server.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using KnowHubApp.Server.Services.Interfaces;
 
 namespace KnowHubApp.Server.Controllers
 {
@@ -13,13 +15,15 @@ namespace KnowHubApp.Server.Controllers
     {
         private readonly UserManager<UserEntity> _userManager;
         private readonly ITokenService _tokenService;
-        private readonly SignInManager<UserEntity> _signInManager;  
+        private readonly SignInManager<UserEntity> _signInManager;
+        public readonly ICoursesService _coursesService;
 
-        public AccountsController(UserManager<UserEntity> userManager, ITokenService tokenService, SignInManager<UserEntity> signInManager)
+        public AccountsController(UserManager<UserEntity> userManager, ITokenService tokenService, SignInManager<UserEntity> signInManager, ICoursesService coursesService)
         {
             _userManager = userManager;
             _tokenService = tokenService;
             _signInManager = signInManager;
+            _coursesService =  coursesService;
 
         }
 
@@ -108,6 +112,23 @@ namespace KnowHubApp.Server.Controllers
 
         }
 
+        [Authorize]
+        [HttpGet("fetchUserDetails/{id}")]
+        public async Task<ProfileDataDTO> GetProfileData(string id)
+        {
+            var fetchedDetails = await _coursesService.GetProfileData(id);
+
+            if (fetchedDetails == null)
+            {
+                return new ProfileDataDTO();
+            }
+            else
+            {
+                return fetchedDetails;
+            }
 
         }
+
+
+    }
     };
