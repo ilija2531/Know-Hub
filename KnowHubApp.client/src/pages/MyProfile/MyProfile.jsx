@@ -3,7 +3,7 @@ import { useAuth } from "../../AuthContext/AuthContext"; // Import AuthContext f
 import "./MyProfile.css";
 
 const MyProfile = () => {
-  const { token, userId } = useAuth(); // Get token and userId from AuthContext
+  const { token, id } = useAuth(); // Get token and userId from AuthContext
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     id: "",
@@ -19,7 +19,7 @@ const MyProfile = () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `http://localhost:5188/api/courses/fetchUserDetails/${userId}`,
+          `http://localhost:5188/api/courses/fetchUserDetails/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`, // Add token to headers
@@ -45,7 +45,7 @@ const MyProfile = () => {
     };
 
     // Only fetch data if userId is available
-    if (userId) {
+    if (id) {
       fetchUserData();
     }
   }, [userId, token]);
