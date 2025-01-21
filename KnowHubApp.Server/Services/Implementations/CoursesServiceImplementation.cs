@@ -35,9 +35,11 @@ namespace KnowHubApp.Server.Services.Implementations
                 await uploadCourseDTO.CourseFile.CopyToAsync(fileStream);
             }
 
+            var webPath = $"/course-videos/{courseUniqueName}";
+
             var courseEntity = _uploadProfileMapper.Map<CourseEntity>(uploadCourseDTO);
             courseEntity.CourseEntityId = Guid.NewGuid();
-            courseEntity.Path = coursePath;
+            courseEntity.Path = webPath;
             courseEntity.Id = userId;
 
             var saveCourse = await _coursesRepository.UploadCourse(courseEntity);
@@ -76,9 +78,15 @@ namespace KnowHubApp.Server.Services.Implementations
 
             if (updateCourseDTO.CourseFile != null)
             {
-                if (!string.IsNullOrEmpty(courseEntity.Path) && File.Exists(courseEntity.Path))
+                var oldFilePath = Path.Combine(
+            Directory.GetCurrentDirectory(),
+            "CourseVideos",
+            Path.GetFileName(courseEntity.Path.Replace("/course-videos/", ""))
+        );
+
+                if (File.Exists(oldFilePath))
                 {
-                    File.Delete(courseEntity.Path);
+                    File.Delete(oldFilePath);
                 }
             }
 
@@ -91,7 +99,7 @@ namespace KnowHubApp.Server.Services.Implementations
                 await updateCourseDTO.CourseFile.CopyToAsync(fileStream);
             }
 
-            courseEntity.Path = newFilePath;
+            courseEntity.Path = $"/course-videos/{newFileName}";
             courseEntity.Title = updateCourseDTO.Title;
             courseEntity.Description = updateCourseDTO.Description;
 

@@ -88,6 +88,15 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
 
+app.UseStaticFiles();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "CourseVideos")),
+    RequestPath = "/course-videos"
+});
+
 
 
 // Configure the HTTP request pipeline.
