@@ -62,6 +62,32 @@ const MyProfile = () => {
     setIsEditing(!isEditing);
   };
 
+  const handleSave = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        `http://localhost:5188/api/accounts/updateUserDetails/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update user details.");
+      }
+      console.log("User details updated successfully.");
+      setError("");
+      setIsEditing(false); // Exit edit mode after saving
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="profile-container">
       <div className="profile-header-container">
@@ -117,6 +143,11 @@ const MyProfile = () => {
           <button onClick={toggleEditMode} className="edit-button">
             {isEditing ? "Cancel" : "Edit"}
           </button>
+          {isEditing && (
+            <button onClick={handleSave} className="save-button">
+              Save
+            </button>
+          )}
         </div>
       </div>
     </div>
