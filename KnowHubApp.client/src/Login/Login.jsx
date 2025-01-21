@@ -26,7 +26,7 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json();
-        saveToken(data.token); // Save the token in the context
+        saveToken({ token: data.token, id: data.id }); // Save the token in the context
         alert("Login successful!");
         navigate("/home");
       } else {

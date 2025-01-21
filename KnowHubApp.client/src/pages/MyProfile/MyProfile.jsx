@@ -19,7 +19,7 @@ const MyProfile = () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `http://localhost:5188/api/courses/fetchUserDetails/${id}`,
+          `http://localhost:5188/api/accounts/fetchUserDetails/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`, // Add token to headers
@@ -48,7 +48,7 @@ const MyProfile = () => {
     if (id) {
       fetchUserData();
     }
-  }, [userId, token]);
+  }, [id, token]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
