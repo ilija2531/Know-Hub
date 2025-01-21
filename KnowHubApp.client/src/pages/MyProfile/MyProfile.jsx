@@ -36,6 +36,7 @@ const MyProfile = () => {
           email: data.email,
           fullName: data.fullName,
         });
+        saveToken({ token, id, fullName: data.fullName }); // Save full name to AuthContext
         setError("");
       } catch (err) {
         setError(err.message);
@@ -48,7 +49,7 @@ const MyProfile = () => {
     if (id) {
       fetchUserData();
     }
-  }, [id, token]);
+  }, [id, token, saveToken]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
