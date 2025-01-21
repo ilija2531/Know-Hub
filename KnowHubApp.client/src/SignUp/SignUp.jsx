@@ -36,7 +36,7 @@ const SignUp = () => {
 
         // Ensure the token is present in the response
         if (data.token) {
-          saveToken(data.token); // Save the token using context
+          saveToken({token: data.token, id: data.id}); // Save the token using context
           alert("Sign up successful!");
           navigate("/home");
         } else {
