@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from "../../AuthContext/AuthContext.jsx"; // Import AuthContext for token
+import { useAuth } from "../../AuthContext/AuthContext"; // Import AuthContext for token and userId
 import "./MyProfile.css";
 
-const MyProfile = ({ id }) => {
-  const { token } = useAuth(); // Get the token from AuthContext
+const MyProfile = () => {
+  const { token, userId } = useAuth(); // Get token and userId from AuthContext
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     id: "",
@@ -19,7 +19,7 @@ const MyProfile = ({ id }) => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `http://localhost:5188/api/courses/fetchUserDetails/${id}`,
+          `http://localhost:5188/api/courses/fetchUserDetails/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`, // Add token to headers
@@ -44,8 +44,11 @@ const MyProfile = ({ id }) => {
       }
     };
 
-    fetchUserData();
-  }, [id, token]);
+    // Only fetch data if userId is available
+    if (userId) {
+      fetchUserData();
+    }
+  }, [userId, token]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
