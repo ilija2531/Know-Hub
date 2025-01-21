@@ -3,29 +3,34 @@ import React, { createContext, useState, useContext } from "react";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  // State to store the authentication token and user ID (changed to id)
+  // State to store the authentication token, user ID, and full name
   const [token, setToken] = useState(localStorage.getItem("token") || null);
-  const [id, setId] = useState(localStorage.getItem("userId") || null); // Change userId to id
+  const [id, setId] = useState(localStorage.getItem("userId") || null); // User ID
+  const [fullName, setFullName] = useState(localStorage.getItem("fullName") || null); // Full Name
 
-  // Function to save the token and id to state and localStorage
+  // Function to save the token, id, and fullName to state and localStorage
   const saveToken = (authData) => {
-    const { token: newToken, id: newId } = authData; // Use id instead of userId
+    const { token: newToken, id: newId, fullName: newFullName } = authData; // Ensure fullName is included
     setToken(newToken);
-    setId(newId); // Set id instead of userId
-    localStorage.setItem("token", newToken); // Save token for persistence
-    localStorage.setItem("userId", newId); // Save id for persistence (you can keep the key name as userId for persistence)
+    setId(newId);
+    setFullName(newFullName);
+    localStorage.setItem("token", newToken); // Save token
+    localStorage.setItem("userId", newId); // Save user ID
+    localStorage.setItem("fullName", newFullName); // Save full name
   };
 
-  // Function to log out and clear the token and id
+  // Function to log out and clear the token, id, and fullName
   const logout = () => {
     setToken(null);
-    setId(null); // Clear id instead of userId
-    localStorage.removeItem("token"); // Remove token from localStorage
-    localStorage.removeItem("userId"); // Remove id from localStorage
+    setId(null);
+    setFullName(null);
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("fullName");
   };
 
   return (
-    <AuthContext.Provider value={{ token, id, saveToken, logout }}>
+    <AuthContext.Provider value={{ token, id, fullName, saveToken, logout }}>
       {" "}
       {/* Pass id instead of userId */}
       {children}

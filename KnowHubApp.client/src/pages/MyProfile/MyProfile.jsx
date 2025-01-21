@@ -3,7 +3,7 @@ import { useAuth } from "../../AuthContext/AuthContext"; // Import AuthContext f
 import "./MyProfile.css";
 
 const MyProfile = () => {
-  const { token, id } = useAuth(); // Get token and userId from AuthContext
+  const { token, id, saveToken } = useAuth(); // Get token and userId from AuthContext
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     id: "",
@@ -71,6 +71,7 @@ const MyProfile = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Add token for authentication
           },
           body: JSON.stringify(formData),
         }
@@ -78,7 +79,9 @@ const MyProfile = () => {
       if (!response.ok) {
         throw new Error("Failed to update user details.");
       }
+      const updatedData = await response.json();
       console.log("User details updated successfully.");
+      saveToken({ token, id, fullName: updatedData.fullName }); // Update AuthContext with full name
       setError("");
       setIsEditing(false); // Exit edit mode after saving
     } catch (err) {

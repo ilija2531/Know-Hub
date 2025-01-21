@@ -13,19 +13,20 @@ import logout_img from "../../assets/Navbar-sliki/logout.png";
 
 const Navbar = ({ theme = "light", setTheme }) => {
   const [open, setOpen] = useState(false);
-  const [userName, setUserName] = useState("user123");
+  const [userName, setUserName] = useState("user123"); // Default username
   const menuRef = useRef(null);
   const location = useLocation();
-  const { token} = useAuth(); // Use AuthContext for authentication state
+  const { token, fullName } = useAuth(); // Get token and fullName from AuthContext
 
+  // Determine if the user is logged in
   const isLoggedIn = !!token;
 
+  // Update username when user is logged in
   useEffect(() => {
     if (isLoggedIn) {
-      const user = JSON.parse(localStorage.getItem("user")); // Fetch user info from localStorage
-      setUserName(user?.name || "User");
+      setUserName(fullName || "User"); // Set username dynamically
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, fullName]);
 
   useEffect(() => {
     const handler = (e) => {
@@ -78,16 +79,14 @@ const Navbar = ({ theme = "light", setTheme }) => {
           </div>
         )}
 
-       
-          <ul>
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-          </ul>
-       
+        <ul>
+          <li>
+            <Link to="/signup">Sign Up</Link>
+          </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+        </ul>
 
         {!hideProfileIcon && (
           <div className="dropdown" ref={menuRef}>
@@ -107,11 +106,8 @@ const Navbar = ({ theme = "light", setTheme }) => {
                   <DropdownItem img={courses_img} text="My Courses" />
                 </Link>
                 <Link to="/logout">
-                <DropdownItem
-                  img={logout_img}
-                  text="Logout"
-                  />
-                  </Link>
+                  <DropdownItem img={logout_img} text="Logout" />
+                </Link>
                 <li onClick={toggleMode} className="dropdownItem">
                   <img
                     src={theme === "light" ? dark_mode : light_mode}
