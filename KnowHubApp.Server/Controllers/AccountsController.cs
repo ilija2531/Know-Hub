@@ -51,6 +51,7 @@ namespace KnowHubApp.Server.Controllers
                         return Ok(
                             new NewUserDTO
                             {
+                                Id = user.Id,
                                 UserName = user.UserName,
                                 Email = user.Email,
                                 Token = _tokenService.CreateToken(user)
@@ -89,10 +90,13 @@ namespace KnowHubApp.Server.Controllers
 
             if (!result.Succeeded) return Unauthorized("Username not found and/or password incorrect");
 
+            
+
             return Ok
                 (
                 new NewUserDTO
                 {
+                    Id = user.Id,
                     UserName = user.UserName,
                     Email = user.Email,
                     Token = _tokenService.CreateToken(user)
