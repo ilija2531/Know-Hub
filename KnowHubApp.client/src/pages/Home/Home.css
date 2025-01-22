@@ -10,6 +10,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px; /* Added margin for spacing */
+  margin-left: 800px;
 }
 
 .home-header {
@@ -20,12 +21,14 @@
 .add-course-button {
   background-color: #62046d;
   color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 1rem;
+  border: 2px solid #62046d; /* Add border for consistent button styling */
+  border-radius: 25px; /* Rounded corners for a softer look */
+  padding: 10px 30px; /* Adjust padding for better appearance */
+  font-size: 1rem; /* Ensure the text is legible and consistent */
+  font-weight: bold; /* Match font weight for emphasis */
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease; /* Smooth hover effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
 }
 
 .add-course-button:hover {
