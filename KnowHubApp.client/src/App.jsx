@@ -7,7 +7,7 @@ import Welcome from "./pages/Welcome/Welcome.jsx";
 import MyCourses from "./pages/MyCourses/MyCourses.jsx";
 import MyProfile from "./pages/MyProfile/MyProfile.jsx";
 import CourseCreationPage from "./CourseCreation/CourseCreationPage.jsx";
-import DeleteCourse from "./DeleteCourse/DeleteCourse.jsx";
+import DeleteCourse from "./DeleteCourse/Deletecourse.jsx";
 import UpdateCourse from "./UpdateCourse/UpdateCourse.jsx";
 import SignUp from "./SignUp/SignUp.jsx";
 import Login from "./Login/Login.jsx";
@@ -37,8 +37,8 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/myCourses" element={<MyCourses />} />
           <Route path="/myProfile" element={<MyProfile />} />
-          <Route path="/deletecourse" element={<DeleteCourse />} />
-          <Route path="/updatecourse" element={<UpdateCourse />} />
+          <Route path="/deletecourse/:id" element={<DeleteCourse />} />
+          <Route path="/updatecourse/:id" element={<UpdateCourse />} />
           <Route path="/coursecreation" element={<CourseCreationPage />} />
           <Route path="/courses/:courseDTOID" element={<SingleCourse />} />
           <Route path="/logout" element={<Logout />} />

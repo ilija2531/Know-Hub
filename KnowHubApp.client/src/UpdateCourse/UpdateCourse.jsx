@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./UpdateCourse.css";
-import { useParams } from "react-router-dom";
 
 const UpdateCourse = () => {
-  const { id } = useParams(); // Extract the courseId from the URL.
+  const { id } = useParams(); // Extract course id from the URL params
   const [Title, setTitle] = useState("");
   const [Description, setDescription] = useState("");
   const [CourseFile, setCourseFile] = useState(null);
   const [Message, setMessage] = useState("");
 
+  // Fetch course details on component mount
   useEffect(() => {
-    // Fetch the current course details when the component loads
     const fetchCourseDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5188/api/courses/updateCourse/${id}`);
+        const response = await axios.get(
+          `http://localhost:5188/api/courses/UpdateCourse${id}`
+        );
         const { Title, Description } = response.data;
         setTitle(Title);
         setDescription(Description);
@@ -25,9 +27,9 @@ const UpdateCourse = () => {
     };
 
     if (id) {
-      fetchCourseDetails();
+      fetchCourseDetails(); // Only fetch if id exists
     }
-  }, [id]); // Fixed dependency array to include `id`
+  }, [id]);
 
   const handleFileChange = (e) => {
     setCourseFile(e.target.files[0]);
@@ -50,15 +52,11 @@ const UpdateCourse = () => {
     }
 
     try {
-      await axios.put(
-        `/api/courses/updateCourse/${id}`, // Fixed the URL to use `id`
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.put(`/api/courses/UpdateCourse${id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       setMessage("Course updated successfully!");
     } catch (error) {
       setMessage("Error updating the course. Please try again.");
