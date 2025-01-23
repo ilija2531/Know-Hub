@@ -63,10 +63,19 @@ const MyCourses = () => {
         <ul className="courses-list">
           {courses.map((course) => (
             <li key={course.courseDTOID} className="course-card">
-              <h3>{course.name}</h3>
+              <div className="course-banner">
+                {/* Video preview for the course */}
+                <video
+                  src={`http://localhost:5188${course.path}`}
+                  className="course-video"
+                  controls
+                ></video>
+              </div>
+              <div className="course-title">{course.title}</div>
               <p>{course.description}</p>
               <button onClick={() => handleCourseClick(course.courseDTOID)}>View Course</button>
             </li>
+    
           ))}
         </ul>
       ) : (

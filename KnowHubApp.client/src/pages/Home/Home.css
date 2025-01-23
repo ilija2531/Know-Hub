@@ -96,7 +96,8 @@
 
 .course-card:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transform: translateY(-5px);
+  transform: translateY(-10px);
+  background-color: #62046d;
 }
 
 .course-banner {
@@ -116,4 +117,7 @@
   text-align: center;
   padding: 10px;
   color: #62046d;
+}
+.course-card:hover .course-title {
+  color: #fff; /* Change the course title text to white on hover */
 }

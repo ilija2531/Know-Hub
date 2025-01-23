@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { AuthContext } from "../../AuthContext/AuthContext.jsx"; // Import AuthContext
+import './SingleCourse.css';
 
 function SingleCourse() {
   const { courseDTOID } = useParams(); // Extract the course ID from the URL

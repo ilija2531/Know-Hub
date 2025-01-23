@@ -5,6 +5,7 @@
     font-family: Arial, sans-serif;
     color: #4b0082; /* Deep purple text */
     min-height: 100vh;
+    transition: 0.3s ease;
   }
   
   .my-courses-container h2 {
@@ -15,8 +16,8 @@
   
   .courses-list {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     gap: 20px;
   }
   
@@ -34,11 +35,6 @@
     transform: translateY(-10px); /* Hover effect to lift the card */
   }
   
-  .course-card h3 {
-    font-size: 1.5rem;
-    color: #6a0dad; /* Deep purple text for course name */
-    margin-bottom: 10px;
-  }
   
   .course-card p {
     font-size: 1rem;
@@ -67,4 +63,29 @@
     font-size: 1.2rem;
     margin-top: 20px;
   }
+  .dark .my-courses-container{
+    background-color: #252222;
+    transition: 0.3s ease;
+  }
+
+  .course-banner {
+    width: 100%;
+    height: auto;
+  }
   
+  .course-video {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Ensures the video fits within the container */
+  }
+  
+  .course-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    color: #62046d;
+  }
+  .course-card:hover .course-title {
+    color: #fff; /* Change the course title text to white on hover */
+}

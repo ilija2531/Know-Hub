@@ -36,7 +36,9 @@
   overflow: hidden;
   padding: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin-right: 5000px;
+  max-width: 100%;
+  width: 100%; /* Ensure container adjusts responsively */
+  margin: 0 auto; /* Center the video container */
 }
 
 video {
