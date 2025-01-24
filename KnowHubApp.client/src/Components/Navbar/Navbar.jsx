@@ -11,7 +11,7 @@ import home_img from "../../assets/Navbar-sliki/home.png";
 import courses_img from "../../assets/Navbar-sliki/myCourses.png";
 import logout_img from "../../assets/Navbar-sliki/logout.png";
 
-const Navbar = ({ theme = "light", setTheme }) => {
+const Navbar = ({ theme = "light", setTheme, onSearch }) => {
   const [open, setOpen] = useState(false);
   const [userName, setUserName] = useState("user123"); // Default username
   const menuRef = useRef(null);
@@ -61,7 +61,7 @@ const Navbar = ({ theme = "light", setTheme }) => {
     location.pathname === "/" ||
     location.pathname === "/signup" ||
     location.pathname === "/login";
-  const hideSearchBox = location.pathname === "/";
+  const hideSearchBox = location.pathname !== "/home";
   const showThemeToggle =
     ["/signup", "/login", "/"].includes(location.pathname);
 
@@ -74,7 +74,11 @@ const Navbar = ({ theme = "light", setTheme }) => {
 
         {!hideSearchBox && (
           <div className="search-box">
-            <input type="text" placeholder="Search" />
+            <input
+              type="text"
+              placeholder="Search"
+              onChange={(e) => onSearch(e.target.value)}
+            />
             <img src={search_icon} alt="search icon" className="search-icon" />
           </div>
         )}

@@ -4,8 +4,8 @@ import { AuthContext } from "../../AuthContext/AuthContext";
 import "./Home.css";
 
 function Home() {
-  // State to store the list of courses
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState([]); // State to store the list of courses
+  const [filteredCourses, setFilteredCourses] = useState([]); // Filtered courses for search
   const { token } = useContext(AuthContext); // Access token from AuthContext
   const navigate = useNavigate(); // Hook for navigation
 
@@ -36,6 +36,7 @@ function Home() {
       if (response.ok) {
         const data = await response.json(); // Parse response data
         setCourses(data); // Update state with courses
+        setFilteredCourses(data); // Initialize filtered courses
       } else {
         console.error("Failed to fetch courses:", await response.text()); // Log error
       }
@@ -44,7 +45,15 @@ function Home() {
     }
   };
 
-  // Fetch courses when the component is mounted or token changes
+  const handleSearch = (query) => {
+    const lowercasedQuery = query.toLowerCase();
+    setFilteredCourses(
+      courses.filter((course) =>
+        course.title.toLowerCase().includes(lowercasedQuery)
+      )
+    );
+  };
+
   useEffect(() => {
     fetchCourses();
   }, []);
@@ -60,8 +69,8 @@ function Home() {
 
       <div className="courses-grid">
         {/* Render the list of courses */}
-        {courses.length > 0 ? (
-          courses.map((course) => (
+        {filteredCourses.length > 0 ? (
+          filteredCourses.map((course) => (
             <div
               key={course.courseDTOID}
               className="course-card"
