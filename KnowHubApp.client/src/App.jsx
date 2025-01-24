@@ -19,6 +19,14 @@ function App() {
   const current_theme = localStorage.getItem("current_theme") || "light";
   const [theme, setTheme] = useState(current_theme);
 
+  const [searchQuery, setSearchQuery] = useState(""); // Store the search query
+
+  // Update search query when the user types
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
+
+
   // Update localStorage whenever theme changes
   useEffect(() => {
     localStorage.setItem("current_theme", theme);
@@ -28,13 +36,13 @@ function App() {
     <>
       {/* Apply the theme to the main container */}
       <div className={`container ${theme}`}>
-        <Navbar theme={theme} setTheme={setTheme} />
+        <Navbar onSearch={handleSearch} theme={theme} setTheme={setTheme} />
         <Routes>
           {/* Define all application routes */}
           <Route path="/" element={<Welcome />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" element={<Home searchQuery={searchQuery} />} />
           <Route path="/myCourses" element={<MyCourses />} />
           <Route path="/myProfile" element={<MyProfile />} />
           <Route path="/deletecourse/:id" element={<DeleteCourse />} />

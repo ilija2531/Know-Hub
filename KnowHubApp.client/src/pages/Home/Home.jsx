@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthContext/AuthContext";
 import "./Home.css";
 
-function Home() {
+function Home({searchQuery}) {
   const [courses, setCourses] = useState([]); // State to store the list of courses
   const [filteredCourses, setFilteredCourses] = useState([]); // Filtered courses for search
   const { token } = useContext(AuthContext); // Access token from AuthContext
   const navigate = useNavigate(); // Hook for navigation
+
 
   // Handle course click to navigate to the course details page
   const handleCourseClick = (courseDTOID) => {
@@ -46,17 +47,21 @@ function Home() {
   };
 
   const handleSearch = (query) => {
-    const lowercasedQuery = query.toLowerCase();
-    setFilteredCourses(
-      courses.filter((course) =>
-        course.title.toLowerCase().includes(lowercasedQuery)
-      )
-    );
+    setSearchQuery(query);
   };
 
   useEffect(() => {
     fetchCourses();
   }, []);
+
+  useEffect(() => {
+    const lowercasedQuery = searchQuery.toLowerCase();
+    setFilteredCourses(
+      courses.filter((course) =>
+        course.title.toLowerCase().includes(lowercasedQuery)
+      )
+    );
+  }, [searchQuery, courses]);
 
   return (
     <div className="home-container">
