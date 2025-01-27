@@ -56,6 +56,7 @@ function SingleCourse() {
       <div className="course-description">
         <p>{course.description}</p> {/* Display the course description */}
       </div>
+      <div className="button-container">
       <div className="update-button-container">
         <Link to={`/updatecourse/${courseDTOID}/`} className="update-course-button">  
           Update Course
@@ -65,6 +66,7 @@ function SingleCourse() {
         <Link to={`/deletecourse/${courseDTOID}/`} className="delete-course-button">  
           Delete Course
         </Link>
+      </div>
       </div>
     </div>
   );

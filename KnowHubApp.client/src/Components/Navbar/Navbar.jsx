@@ -68,7 +68,7 @@ const Navbar = ({ theme = "light", setTheme, onSearch }) => {
   return (
     <>
       <div className="navbar">
-        <Link to="/home">
+        <Link to={isLoggedIn ? "/home" : "/"}>
           <img src={logo_img} className="logoImg" alt="logo" />
         </Link>
 
@@ -83,45 +83,47 @@ const Navbar = ({ theme = "light", setTheme, onSearch }) => {
           </div>
         )}
 
-        <ul>
-          <li>
-            <Link to="/signup">Sign Up</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-        </ul>
-
-        {!hideProfileIcon && (
-          <div className="dropdown" ref={menuRef}>
-            <div className="dropdown-trigger" onClick={() => setOpen(!open)}>
-              <img className="account-img" src={account_img} alt="account" />
+        {!isLoggedIn ? (
+          <ul>
+            <li>
+              <Link to="/signup">Sign Up</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          </ul>
+        ) : (
+          !hideProfileIcon && (
+            <div className="dropdown" ref={menuRef}>
+              <div className="dropdown-trigger" onClick={() => setOpen(!open)}>
+                <img className="account-img" src={account_img} alt="account" />
+              </div>
+              <div className={`dropdown-menu ${open ? "active" : "inactive"}`}>
+                {isLoggedIn && <h3>{userName}</h3>}
+                <ul>
+                  <Link to="/home">
+                    <DropdownItem img={home_img} text="Home" />
+                  </Link>
+                  <Link to="/myProfile">
+                    <DropdownItem img={account_img} text="My Profile" />
+                  </Link>
+                  <Link to="/myCourses">
+                    <DropdownItem img={courses_img} text="My Courses" />
+                  </Link>
+                  <Link to="/logout">
+                    <DropdownItem img={logout_img} text="Logout" />
+                  </Link>
+                  <li onClick={toggleMode} className="dropdownItem">
+                    <img
+                      src={theme === "light" ? dark_mode : light_mode}
+                      alt="toggle-icon"
+                    />
+                    <span>Toggle Theme</span>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div className={`dropdown-menu ${open ? "active" : "inactive"}`}>
-              {isLoggedIn && <h3>{userName}</h3>}
-              <ul>
-                <Link to="/home">
-                  <DropdownItem img={home_img} text="Home" />
-                </Link>
-                <Link to="/myProfile">
-                  <DropdownItem img={account_img} text="My Profile" />
-                </Link>
-                <Link to="/myCourses">
-                  <DropdownItem img={courses_img} text="My Courses" />
-                </Link>
-                <Link to="/logout">
-                  <DropdownItem img={logout_img} text="Logout" />
-                </Link>
-                <li onClick={toggleMode} className="dropdownItem">
-                  <img
-                    src={theme === "light" ? dark_mode : light_mode}
-                    alt="toggle-icon"
-                  />
-                  <span>Toggle Theme</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+          )
         )}
 
         {showThemeToggle && (
