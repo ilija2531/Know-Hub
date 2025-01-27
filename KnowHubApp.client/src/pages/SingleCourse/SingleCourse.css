@@ -47,3 +47,75 @@ video {
   height: auto;
   border-radius: 5px;
 }
+
+
+.update-course-button {
+  background-color: #4caf50;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+.update-course-button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+.update-course-button:active {
+  background-color: #3e8e41;
+}
+
+.delete-course-button {
+  background-color: #c41f2a;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+.delete-course-button:hover {
+  background-color: #c41f2a;
+  transform: scale(1.05);
+}
+
+.delete-course-button:active {
+  background-color: #c41f2a;
+}
+
+
+.delete-course-button {
+  background-color: #c41f2a;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+.delete-course-button:hover {
+  background-color: #c41f2a;
+  transform: scale(1.05);
+}
+
+.delete-course-button:active {
+  background-color: #c41f2a;
+}
+

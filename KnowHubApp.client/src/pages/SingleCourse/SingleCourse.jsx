@@ -56,45 +56,16 @@ function SingleCourse() {
       <div className="course-description">
         <p>{course.description}</p> {/* Display the course description */}
       </div>
-      {/* Delete Course Link */}
-      <Link
-        to={`/deletecourse`}
-        style={{
-          display: "inline-block",
-          backgroundColor: "#ff4d4d",
-          color: "#fff",
-          border: "none",
-          borderRadius: "5px",
-          padding: "10px 20px",
-          fontSize: "16px",
-          textDecoration: "none",
-          textAlign: "center",
-          marginTop: "20px",
-          cursor: "pointer",
-        }}
-      >
-        Delete Course
-      </Link>
-
-      {/* Update Course Link */}
-      <Link
-        to={`/updatecourse/${courseDTOID}`} // Correctly pass courseDTOID for the update page
-        style={{
-          display: "inline-block",
-          backgroundColor: "#4CAF50",
-          color: "#fff",
-          border: "none",
-          borderRadius: "5px",
-          padding: "10px 20px",
-          fontSize: "16px",
-          textDecoration: "none",
-          textAlign: "center",
-          marginTop: "20px",
-          cursor: "pointer",
-        }}
-      >
-        Update Course
-      </Link>
+      <div className="update-button-container">
+        <Link to={`/updatecourse/${courseDTOID}/`} className="update-course-button">  
+          Update Course
+        </Link>
+      </div>
+      <div className="delete-button-container">
+        <Link to={`/deletecourse/${courseDTOID}/`} className="delete-course-button">  
+          Delete Course
+        </Link>
+      </div>
     </div>
   );
 }

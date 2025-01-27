@@ -12,41 +12,48 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   color: #ffffff;
-  width: 90%; /* Make it responsive */
-  max-width: 400px; /* Keep the max width as 400px */
+  width: 90%;
+  max-width: 400px;
   text-align: center;
 }
 
 .update-course-form h2 {
   margin-bottom: 20px;
+  color:#fff;
 }
 
 .update-course-form label {
   display: block;
   margin-bottom: 5px;
   text-align: left;
-  font-weight: bold; /* Make labels stand out */
-  color:#fff;
+  font-weight: bold;
+  color: #ffccff; /* Improved contrast */
 }
 
 .update-course-form input[type="text"],
 .update-course-form textarea,
 .update-course-form input[type="file"] {
   width: 100%;
-  padding: 10px; /* Slightly increased padding for better usability */
+  padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #cccccc;
   border-radius: 5px;
-  font-size: 14px; /* Make input text slightly larger */
-  transition: border 0.3s ease; /* Add transition for border */
+  font-size: 14px;
+  transition: border 0.3s ease;
 }
 
 .update-course-form input[type="text"]:focus,
 .update-course-form textarea:focus,
 .update-course-form input[type="file"]:focus {
-  outline: none; /* Remove default outline */
-  border: 1px solid #8e24aa; /* Highlight border on focus */
-  box-shadow: 0 0 5px rgba(142, 36, 170, 0.5); /* Add glow effect */
+  outline: none;
+  border: 1px solid #ffffff; /* Better contrast */
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* White glow */
+}
+
+.update-course-form input[type="file"] {
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
 }
 
 .update-course-form textarea {
@@ -62,30 +69,30 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  transform-origin: center; /* Smoother scaling */
 }
 
 .update-course-form button:hover {
   background-color: #6a1b9a;
-  transform: scale(1.05); /* Slight zoom effect */
+  transform: scale(1.05);
 }
 
 .message {
   margin-top: 15px;
   font-size: 14px;
   font-weight: bold;
+  color: #fff;
 }
 
-/* Differentiate success and error messages */
 .message.success {
-  color: #4caf50; /* Green for success */
+  color: #4caf50;
 }
 
 .message.error {
-  color: #f44336; /* Red for error */
+  color: #fff;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .update-course-form {
     width: 95%;

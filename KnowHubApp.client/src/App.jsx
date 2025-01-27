@@ -45,8 +45,8 @@ function App() {
           <Route path="/home" element={<Home searchQuery={searchQuery} />} />
           <Route path="/myCourses" element={<MyCourses />} />
           <Route path="/myProfile" element={<MyProfile />} />
-          <Route path="/deletecourse/:id" element={<DeleteCourse />} />
-          <Route path="/updatecourse/:id" element={<UpdateCourse />} />
+          <Route path="/deletecourse/:courseDTOID" element={<DeleteCourse />} />
+          <Route path="/updatecourse/:courseDTOID/" element={<UpdateCourse />} />
           <Route path="/coursecreation" element={<CourseCreationPage />} />
           <Route path="/courses/:courseDTOID" element={<SingleCourse />} />
           <Route path="/logout" element={<Logout />} />
