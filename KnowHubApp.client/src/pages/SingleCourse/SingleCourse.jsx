@@ -6,7 +6,7 @@ import './SingleCourse.css';
 function SingleCourse() {
   const { courseDTOID } = useParams(); // Extract the course ID from the URL
   const [course, setCourse] = useState(null); // Initialize state for the course details
-  const { token } = useContext(AuthContext); // Get the token from AuthContext
+  const { token, userId } = useContext(AuthContext); // Get the token and userId from AuthContext
 
   useEffect(() => {
     console.log("Fetching course details for ID:", courseDTOID); // Log the course ID being fetched
@@ -56,18 +56,22 @@ function SingleCourse() {
       <div className="course-description">
         <p>{course.description}</p> {/* Display the course description */}
       </div>
-      <div className="button-container">
-      <div className="update-button-container">
-        <Link to={`/updatecourse/${courseDTOID}/`} className="update-course-button">  
-          Update Course
-        </Link>
-      </div>
-      <div className="delete-button-container">
-        <Link to={`/deletecourse/${courseDTOID}/`} className="delete-course-button">  
-          Delete Course
-        </Link>
-      </div>
-      </div>
+
+      {/* Only show the buttons if the logged-in user is the course owner */}
+      {userId === course.ownerId && (
+        <div className="button-container">
+          <div className="update-button-container">
+            <Link to={`/updatecourse/${courseDTOID}/`} className="update-course-button">
+              Update Course
+            </Link>
+          </div>
+          <div className="delete-button-container">
+            <Link to={`/deletecourse/${courseDTOID}/`} className="delete-course-button">
+              Delete Course
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

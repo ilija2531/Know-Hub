@@ -67,7 +67,7 @@ const MyProfile = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:5188/api/accounts/updateUserDetails/${id}`,
+        `http://localhost:5188/api/courses/updateUserDetails/${id}`,
         {
           method: "PUT",
           headers: {

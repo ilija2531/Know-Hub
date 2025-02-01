@@ -16,7 +16,7 @@
   
   .courses-list {
     display: flex;
-    justify-content: space-between;
+    grid-template-columns: repeat(auto-fit, minmax(550px, 0fr));
     align-items: center;
     gap: 20px;
   }
