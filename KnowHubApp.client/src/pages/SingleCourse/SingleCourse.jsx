@@ -1,17 +1,20 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { AuthContext } from "../../AuthContext/AuthContext.jsx"; // Import AuthContext
+import { useParams, Link, useLocation } from "react-router-dom"; // Import useLocation
+import { AuthContext } from "../../AuthContext/AuthContext.jsx";
 import './SingleCourse.css';
 
 function SingleCourse() {
-  const { courseDTOID } = useParams(); // Extract the course ID from the URL
-  const [course, setCourse] = useState(null); // Initialize state for the course details
-  const { token, userId } = useContext(AuthContext); // Get the token and userId from AuthContext
+  const { courseDTOID } = useParams();
+  const [course, setCourse] = useState(null);
+  const { token } = useContext(AuthContext);
+  const location = useLocation();
+  
+  // Check if the user came from the home page
+  const isFromHomePage = location.state?.fromHome || false;
 
   useEffect(() => {
-    console.log("Fetching course details for ID:", courseDTOID); // Log the course ID being fetched
+    console.log("Fetching course details for ID:", courseDTOID);
 
-    // Fetch the details of the selected course
     const fetchCourseDetails = async () => {
       try {
         const response = await fetch(
@@ -19,46 +22,45 @@ function SingleCourse() {
           {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${token}`, // Use the token from AuthContext
+              Authorization: `Bearer ${token}`,
             },
           }
         );
 
         if (response.ok) {
-          const data = await response.json(); // Parse the JSON response
-          console.log("Course details fetched successfully:", data); // Log the fetched course details
-          setCourse(data); // Update the course state
+          const data = await response.json();
+          console.log("Course details fetched successfully:", data);
+          setCourse(data);
         } else {
           const errorMessage = await response.text();
-          console.error("Failed to fetch course details:", errorMessage); // Log the error message
+          console.error("Failed to fetch course details:", errorMessage);
         }
       } catch (error) {
-        console.error("Error fetching course details:", error); // Log any network or other errors
+        console.error("Error fetching course details:", error);
       }
     };
 
-    fetchCourseDetails(); // Call the function to fetch course details
+    fetchCourseDetails();
   }, [courseDTOID, token]);
 
   if (!course) {
-    return <p>Course not found or loading...</p>; // Display a loading or not found message
+    return <p>Course not found or loading...</p>;
   }
 
   return (
     <div className="single-course-container">
       <div className="video-container">
-        <video src={`http://localhost:5188${course.path}`} controls />{" "}
-        {/* Display the course video */}
+        <video src={`http://localhost:5188${course.path}`} controls />
       </div>
       <div className="course-header">
-        <h1>{course.title}</h1> {/* Display the course title */}
+        <h1>{course.title}</h1>
       </div>
       <div className="course-description">
-        <p>{course.description}</p> {/* Display the course description */}
+        <p>{course.description}</p>
       </div>
 
-      {/* Only show the buttons if the logged-in user is the course owner */}
-      {userId === course.ownerId && (
+      {/* Conditionally render buttons if not accessed from the home page */}
+      {!isFromHomePage && (
         <div className="button-container">
           <div className="update-button-container">
             <Link to={`/updatecourse/${courseDTOID}/`} className="update-course-button">

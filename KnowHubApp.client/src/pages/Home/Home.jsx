@@ -12,7 +12,7 @@ function Home({searchQuery}) {
 
   // Handle course click to navigate to the course details page
   const handleCourseClick = (courseDTOID) => {
-    navigate(`/courses/${courseDTOID}`);
+    navigate(`/courses/${courseDTOID}`, { state: { fromHome: true } });
   };
 
   // Handle navigation to the course creation page

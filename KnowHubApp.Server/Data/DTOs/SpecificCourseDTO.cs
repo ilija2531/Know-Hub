@@ -16,6 +16,8 @@ namespace KnowHubApp.Server.Data.DTOs
 
         public string Path { get; set; }
 
+        
+
 
     }
 }
