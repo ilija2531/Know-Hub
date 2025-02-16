@@ -65,7 +65,7 @@ const Welcome = () => {
               </div>
               <div className="service-card">
                 <h3>💬 Support</h3>
-                <p>Our dedicated support team is available 24/7 to help you with any issues you encounter. Whether it's technical assistance or learning advice, we're here to help you succeed.</p>
+                <p>Our dedicated support team is available 24/7 to help you with any issues you encounter. Whether it's technical assistance or learning advice, we're here to help you succeed. Contact us at: iknowhub@gmail.com</p>
               </div>
             </div>
           </section>

@@ -1,4 +1,4 @@
-
+import './Logout.css';
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext/AuthContext"; // Import AuthContext hook
@@ -22,7 +22,7 @@ const Logout = () => {
 
   return (
     <div>
-      <p>Logging out...</p>
+      <p className='logout'>Logging out...</p>
     </div>
   );
 };
