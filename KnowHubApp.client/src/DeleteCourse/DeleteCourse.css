@@ -12,6 +12,7 @@ body {
   align-items: center;
   height: 100vh;
   background-color: #f5f0ff; /* Light purple background */
+  transition: 0.3 ease;
 }
 
 .delete-course-message {
@@ -57,4 +58,18 @@ button:hover {
 
 .message.error {
   color: #f44336; /* Red for error */
+}
+.dark .delete-course-container{
+  background-color: #252222;
+  transition: 0.3 ease;
+}
+
+@media (max-width: 600px) {
+  .container {
+      width: 100%;
+      padding: 10px;
+  }
+  h1 {
+      font-size: 20px;
+  }
 }

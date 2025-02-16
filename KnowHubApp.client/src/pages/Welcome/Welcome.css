@@ -265,3 +265,13 @@
   .dark .cta-button:hover {
     background-color: #9c27b0;
   }
+
+  @media (max-width: 600px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+    h1 {
+        font-size: 20px;
+    }
+  }

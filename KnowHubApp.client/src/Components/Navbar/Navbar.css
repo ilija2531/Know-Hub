@@ -227,3 +227,12 @@ ul li:hover {
 .dropdownItem a:hover {
     color: rgb(215, 34, 12);
 }
+@media (max-width: 600px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+    h1 {
+        font-size: 20px;
+    }
+}

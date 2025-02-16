@@ -122,4 +122,13 @@ video {
 .delete-course-button:active {
   background-color: #c41f2a;
 }
+@media (max-width: 600px) {
+  .container {
+      width: 100%;
+      padding: 10px;
+  }
+  h1 {
+      font-size: 20px;
+  }
+}
 

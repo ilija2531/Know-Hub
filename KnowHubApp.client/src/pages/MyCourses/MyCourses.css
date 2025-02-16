@@ -18,7 +18,7 @@
     display: flex;
     grid-template-columns: repeat(auto-fit, minmax(550px, 0fr));
     align-items: center;
-    gap: 20px;
+    gap: 100px;
   }
   
   .course-card {
@@ -88,4 +88,13 @@
   }
   .course-card:hover .course-title {
     color: #fff; /* Change the course title text to white on hover */
+}
+@media (max-width: 600px) {
+  .container {
+      width: 100%;
+      padding: 10px;
+  }
+  h1 {
+      font-size: 20px;
+  }
 }

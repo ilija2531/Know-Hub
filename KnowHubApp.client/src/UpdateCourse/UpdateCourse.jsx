@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext/AuthContext.jsx";
 import "./UpdateCourse.css";
 
 const UpdateCourse = () => {
-  const { courseDTOID} = useParams(); // Extract both courseDTOID and updatedCourseDtoId from the URL
-  const { token } = useAuth(); // Get the token from AuthContext
+  const { courseDTOID } = useParams();
+  const { token } = useAuth();
+  const navigate = useNavigate(); 
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [courseFile, setCourseFile] = useState(null);
   const [message, setMessage] = useState("");
 
-  // Fetch course details on component mount
   useEffect(() => {
     const fetchCourseDetails = async () => {
       try {
@@ -21,7 +21,7 @@ const UpdateCourse = () => {
           {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${token}`, // Include token in headers
+              Authorization: `Bearer ${token}`,
             },
           }
         );
@@ -40,7 +40,7 @@ const UpdateCourse = () => {
     };
 
     if (courseDTOID) {
-      fetchCourseDetails(); // Only fetch if courseDTOID exists
+      fetchCourseDetails();
     }
   }, [courseDTOID, token]);
 
@@ -50,40 +50,46 @@ const UpdateCourse = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!title || !description) {
       setMessage("Please fill in all required fields.");
       return;
     }
-  
+
     const formData = new FormData();
-    formData.append("id", courseDTOID); // Ensure correct field name
+    formData.append("id", courseDTOID);
     formData.append("Title", title);
     formData.append("Description", description);
     if (courseFile) {
       formData.append("CourseFile", courseFile);
     }
-  
+
     try {
       const response = await fetch(
         `http://localhost:5188/api/courses/updateCourse/${courseDTOID}`,
         {
           method: "PUT",
           headers: {
-            Authorization: `Bearer ${token}`, // Include token
+            Authorization: `Bearer ${token}`,
           },
-          body: formData, // Send formData
+          body: formData,
         }
       );
-  
-      const responseText = await response.text(); // Debugging: Inspect response text
+
+      const responseText = await response.text();
       console.log("Response:", response.status, responseText);
-  
+
       if (!response.ok) {
         throw new Error(responseText || "Failed to update the course.");
       }
-  
+
       setMessage("Course updated successfully!");
+      
+    
+      setTimeout(() => {
+        navigate(`/courses/${courseDTOID}`);
+      }, 2000);
+      
     } catch (error) {
       console.error("Error updating the course:", error);
       setMessage("Error updating the course. Please try again.");

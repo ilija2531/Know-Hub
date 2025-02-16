@@ -82,7 +82,7 @@
 .courses-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(550px, 0fr)); /* Responsive layout */
-  gap: 20px 20px;
+  gap: 50px 20px;
 }
 
 .course-card {
@@ -120,4 +120,13 @@
 }
 .course-card:hover .course-title {
   color: #fff; /* Change the course title text to white on hover */
+}
+@media (max-width: 600px) {
+  .container {
+      width: 100%;
+      padding: 10px;
+  }
+  h1 {
+      font-size: 20px;
+  }
 }

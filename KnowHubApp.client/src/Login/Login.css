@@ -95,3 +95,12 @@
     font-weight: 700;
     cursor: pointer;
 }
+@media (max-width: 600px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+    h1 {
+        font-size: 20px;
+    }
+}

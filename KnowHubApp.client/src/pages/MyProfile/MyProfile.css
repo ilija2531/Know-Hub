@@ -83,3 +83,12 @@
     background-color: #4b0047;
   }
   
+  @media (max-width: 600px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+    h1 {
+        font-size: 20px;
+    }
+  }

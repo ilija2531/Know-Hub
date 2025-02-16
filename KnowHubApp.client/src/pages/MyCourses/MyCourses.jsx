@@ -72,7 +72,6 @@ const MyCourses = () => {
                 ></video>
               </div>
               <div className="course-title">{course.title}</div>
-              <p>{course.description}</p>
               <button onClick={() => handleCourseClick(course.courseDTOID)}>View Course</button>
             </li>
     

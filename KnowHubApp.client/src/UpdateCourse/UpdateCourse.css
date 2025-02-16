@@ -4,6 +4,7 @@
   align-items: center;
   height: 100vh;
   background-color: #f3f3f3;
+  transition: 0.3s ease;
 }
 
 .update-course-form {
@@ -91,6 +92,11 @@
 
 .message.error {
   color: #fff;
+}
+
+.dark .update-course-container{
+  background-color: #252222;
+  transition: 0.3s ease;
 }
 
 @media (max-width: 768px) {
